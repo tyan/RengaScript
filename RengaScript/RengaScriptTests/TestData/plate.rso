@@ -1,0 +1,10 @@
+--length = MetricParameter("Length", 400.0)
+--name = length:name()
+other = MetricParameterObj("Length", 400.0)
+--width = MetricParameter("Width", 300.0)
+--thickness = MetricParameter("Thickness", 10.0)
+--angle = AngleParameter("Angle", 45.0)
+--
+--scetch = Rect(0, 0, length, width)
+--body = Extrusion(scetch, thickness, 0.0)
+--body.Rotate(angle)
