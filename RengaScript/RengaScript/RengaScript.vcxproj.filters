@@ -20,6 +20,9 @@
     <ClCompile Include="MetricParameter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Parameter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
@@ -31,7 +34,7 @@
     <ClInclude Include="MetricParameter.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="include\RengaScript\Parameters.h">
+    <ClInclude Include="include\RengaScript\Parameter.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
