@@ -23,6 +23,9 @@
     <ClCompile Include="Parameter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="RuntimeContext.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="include\RengaScript\Parameter.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeContext.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

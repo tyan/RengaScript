@@ -4,7 +4,7 @@
 
 #include <LuaBridge.h>
 
-#include <iostream>
+#include "RuntimeContext.h"
 
 namespace renga_script
 {
@@ -44,9 +44,7 @@ namespace renga_script
     Impl(const std::wstring & path)
       : m_path(path)
     {
-      lua_State *L = luaL_newstate();   /* opens Lua */
-
-      luaL_openlibs(L);             /* opens the basic library */
+      RuntimeContext context;
 
       //luabridge::getGlobalNamespace(L)
       //  //.beginNamespace("renga_script")
@@ -62,23 +60,20 @@ namespace renga_script
 
       try
       {
-        if (0 != luaL_loadfile(L, ".\\TestData\\plate.rso"))
+        if (0 != luaL_loadfile(context.getLua(), ".\\TestData\\plate.rso"))
           throw "Cannot find file!\n";
 
-        if (0 != lua_pcall(L, 0, 0, 0))
+        if (0 != lua_pcall(context.getLua(), 0, 0, 0))
           throw "Cannot run file!\n";
       }
-      catch (const char*  msg)
+      catch (const char*)
       {
-        std::cout << msg;
         // TODO: error output
       }
       catch (...)
       {
         // TODO: error output
       }
-
-      lua_close(L);
     }
 
   private:

@@ -85,12 +85,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="RuntimeContext.h" />
     <ClInclude Include="include\RengaScript\ApiDefines.h" />
     <ClInclude Include="include\RengaScript\Parameter.h" />
     <ClInclude Include="include\RengaScript\Script.h" />
     <ClInclude Include="MetricParameter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RuntimeContext.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
