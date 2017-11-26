@@ -6,25 +6,27 @@
 
 namespace renga_script
 {
-  class AbstractParameter
+  class RENGA_SCRIPT_EXTERNAL AbstractParameter
   {
   public:
-    virtual ~AbstractParameter() = 0;
-    virtual const std::wstring& name() const = 0;
+    virtual ~AbstractParameter();
+    const std::wstring& name() const;
+    
+  protected:
+    std::wstring m_name;
   };
 
-  class MetricParameter : public AbstractParameter
+  class RENGA_SCRIPT_EXTERNAL MetricParameter : public AbstractParameter
   {
   public:
-    ~MetricParameter();
-    
-    // AbstractParameter
-    const std::wstring& name() const override;
-
+   ~MetricParameter();
+   double value() const;
+   void setValue(double value);
+   
   private:
     MetricParameter(const std::wstring& name, double defaultValue);
 
   private:
-
+    double m_value;
   };
 }
