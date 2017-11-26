@@ -11,6 +11,9 @@ public:
 
   lua_State* getLua();
 
+public:
+  static RuntimeContext* getContext(lua_State* pLuaState);
+
 private:
   lua_State* m_pLuaState;
 

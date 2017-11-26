@@ -24,3 +24,8 @@ lua_State * RuntimeContext::getLua()
 {
   return m_pLuaState;
 }
+
+RuntimeContext * RuntimeContext::getContext(lua_State * pLuaState)
+{
+  return m_registry.at(pLuaState);
+}
