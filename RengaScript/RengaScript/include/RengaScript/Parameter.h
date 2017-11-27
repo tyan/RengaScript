@@ -15,6 +15,7 @@ namespace renga_script
     
   protected:
     AbstractParameter(const std::wstring& name);
+    AbstractParameter(const AbstractParameter& other);
 
   protected:
     // TODO: warning C4251 [tyan]
@@ -25,13 +26,12 @@ namespace renga_script
   class RENGA_SCRIPT_EXTERNAL MetricParameter : public AbstractParameter
   {
   public:
+    MetricParameter(const std::wstring& name, double defaultValue);
+    MetricParameter(const MetricParameter& other);
    ~MetricParameter();
 
    double value() const;
    void setValue(double value);
-   
-  private:
-    MetricParameter(const std::wstring& name, double defaultValue);
 
   private:
     double m_value;

@@ -25,6 +25,11 @@ lua_State * RuntimeContext::getLua()
   return m_pLuaState;
 }
 
+std::map<std::wstring, std::shared_ptr<renga_script::AbstractParameter>>& RuntimeContext::params()
+{
+  return m_params;
+}
+
 RuntimeContext * RuntimeContext::getContext(lua_State * pLuaState)
 {
   return m_registry.at(pLuaState);

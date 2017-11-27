@@ -9,21 +9,30 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source\ScriptWrapper">
+      <UniqueIdentifier>{cd9147f2-92c6-40b1-8f67-df90a4c148e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API">
+      <UniqueIdentifier>{c5a1ebd0-0ae6-4d71-bc9d-13dbeb15280c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Script.cpp">
+    <ClCompile Include="RuntimeContext.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="MetricParameter.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="ParameterWrapper.cpp">
+      <Filter>Source\ScriptWrapper</Filter>
     </ClCompile>
     <ClCompile Include="Parameter.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\API</Filter>
     </ClCompile>
-    <ClCompile Include="RuntimeContext.cpp">
+    <ClCompile Include="Script.cpp">
+      <Filter>Source\API</Filter>
+    </ClCompile>
+    <ClCompile Include="StringConvertion.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,13 +43,16 @@
     <ClInclude Include="include\RengaScript\Script.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="MetricParameter.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="include\RengaScript\Parameter.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeContext.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ParameterWrapper.h">
+      <Filter>Source\ScriptWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="StringConvertion.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

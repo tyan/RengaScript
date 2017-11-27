@@ -7,6 +7,11 @@ namespace renga_script
     : m_name(name)
   {}
 
+  AbstractParameter::AbstractParameter(const AbstractParameter & other)
+    : m_name(other.m_name)
+  {
+  }
+
   AbstractParameter::~AbstractParameter()
   {}
 
@@ -21,6 +26,12 @@ namespace renga_script
     : AbstractParameter(name)
     , m_value(defaultValue)
   {}
+
+  MetricParameter::MetricParameter(const MetricParameter & other)
+    : AbstractParameter(other)
+    , m_value(other.m_value)
+  {
+  }
   
   MetricParameter::~MetricParameter()
   {}
