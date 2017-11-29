@@ -21,9 +21,7 @@ MetricParameterWrapper::MetricParameterWrapper(char const* name, double defaultV
   std::wstring paramName = convertString(name);
   double paramValue = defaultValue;
 
-  m_parameter = std::make_shared<renga_script::MetricParameter>(paramName, paramValue);
-
   auto pContext = RuntimeContext::getContext(pLuaState);
   assert(pContext != nullptr);
-  pContext->params()[paramName] = m_parameter;
+  m_pImp = pContext->addMetricParameter(paramName, paramValue);
 }

@@ -2,9 +2,12 @@
 #include <string>
 #include <memory>
 
-#include <Parameter.h>
-
 struct lua_State;
+
+namespace renga_script
+{
+  class MetricParameter;
+}
 
 class MetricParameterWrapper
 {
@@ -16,5 +19,5 @@ public:
   MetricParameterWrapper(const MetricParameterWrapper& other) = delete;
 
 private:
-  std::shared_ptr<renga_script::MetricParameter> m_parameter;
+  renga_script::MetricParameter* m_pImp;
 };

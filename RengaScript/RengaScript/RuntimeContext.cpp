@@ -1,4 +1,6 @@
 #include "RuntimeContext.h"
+#include "Parameter.h"
+#include "ParameterWrapper.h"
 
 #include <lua.hpp>
 
@@ -11,6 +13,8 @@ RuntimeContext::RuntimeContext()
   luaL_openlibs(m_pLuaState);      /* opens the basic library */
 
   m_registry.insert(std::make_pair(m_pLuaState, this));
+
+  MetricParameterWrapper::RegisterType(m_pLuaState);
 }
 
 RuntimeContext::~RuntimeContext()
@@ -25,9 +29,11 @@ lua_State * RuntimeContext::getLua()
   return m_pLuaState;
 }
 
-std::map<std::wstring, std::shared_ptr<renga_script::AbstractParameter>>& RuntimeContext::params()
+renga_script::MetricParameter * RuntimeContext::addMetricParameter(const std::wstring & name, double value)
 {
-  return m_params;
+  auto metricParameter = std::make_shared<renga_script::MetricParameter>(name, value);
+  m_params.push_back(metricParameter);
+  return metricParameter.get();
 }
 
 RuntimeContext * RuntimeContext::getContext(lua_State * pLuaState)

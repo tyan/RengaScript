@@ -18,8 +18,7 @@ namespace renga_script
   const std::wstring & AbstractParameter::name() const
   {
     return m_name;
-  }
-  
+  }  
 
   // MetricParameter
   MetricParameter::MetricParameter(const std::wstring & name, double defaultValue)
