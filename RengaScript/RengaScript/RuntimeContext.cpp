@@ -36,6 +36,16 @@ renga_script::MetricParameter * RuntimeContext::addMetricParameter(const std::ws
   return metricParameter.get();
 }
 
+size_t RuntimeContext::parametersCount() const
+{
+  return m_params.size();
+}
+
+renga_script::AbstractParameter * RuntimeContext::getParameter(size_t index) const
+{
+  return m_params.at(index).get();
+}
+
 RuntimeContext * RuntimeContext::getContext(lua_State * pLuaState)
 {
   return m_registry.at(pLuaState);
