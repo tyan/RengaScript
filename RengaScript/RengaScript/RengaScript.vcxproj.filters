@@ -38,6 +38,9 @@
     <ClCompile Include="LuaScriptRunner.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
@@ -62,6 +65,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="ScriptData.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\State.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="StateImpl.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

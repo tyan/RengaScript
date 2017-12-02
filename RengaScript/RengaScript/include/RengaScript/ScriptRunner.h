@@ -1,5 +1,6 @@
 #pragma once
 #include "ApiDefines.h"
+#include "State.h"
 
 #include <string>
 
@@ -9,7 +10,7 @@ namespace renga_script
   {
   public:
     ScriptRunner(const std::wstring& path);
-    bool run();
+    bool run(State& state);
 
   private:
     ScriptRunner() = delete;

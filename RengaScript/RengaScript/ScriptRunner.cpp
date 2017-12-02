@@ -1,7 +1,8 @@
 #include <ScriptRunner.h>
 
 #include "LuaScriptRunner.h"
-#include "ScriptData.h"
+#include "StateImpl.h"
+
 
 namespace renga_script
 {
@@ -13,23 +14,22 @@ namespace renga_script
     {
     }
 
-    bool run()
+    bool run(ScriptData& data)
     {
       LuaScriptRunner luaRunner;
-      return luaRunner.run(m_path, m_data);
+      return luaRunner.run(m_path, data);
     }
 
   private:
     std::wstring m_path;
-    ScriptData m_data;
   };
 
   ScriptRunner::ScriptRunner(const std::wstring & path)
     : m_pImpl(new Impl(path))
   {}
 
-  bool ScriptRunner::run()
+  bool ScriptRunner::run(State& state)
   {
-    return m_pImpl->run();
+    return m_pImpl->run(state.m_pImpl->m_data);
   }
 }
