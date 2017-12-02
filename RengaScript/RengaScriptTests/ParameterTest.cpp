@@ -1,8 +1,9 @@
 #include "stdafx.h"
-#include <RengaScript/Script.h>
+#include <RengaScript/ScriptRunner.h>
 
 TEST(ParameterTest, shouldReadMetricParameter)
 {
-  renga_script::Script script(L".\\TestData\\plate.rso");
+  renga_script::ScriptRunner runner(L".\\TestData\\plate.rso");
+  runner.run();
   EXPECT_TRUE(true);
 }

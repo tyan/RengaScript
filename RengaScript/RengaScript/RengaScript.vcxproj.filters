@@ -29,18 +29,18 @@
     <ClCompile Include="Parameter.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
-    <ClCompile Include="Script.cpp">
+    <ClCompile Include="StringConvertion.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptRunner.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
-    <ClCompile Include="StringConvertion.cpp">
+    <ClCompile Include="LuaScriptRunner.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\Script.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\Parameter.h">
@@ -53,6 +53,15 @@
       <Filter>Source\ScriptWrapper</Filter>
     </ClInclude>
     <ClInclude Include="StringConvertion.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\ScriptRunner.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScriptRunner.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptData.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

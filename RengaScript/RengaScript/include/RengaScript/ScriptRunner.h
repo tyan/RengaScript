@@ -5,13 +5,14 @@
 
 namespace renga_script
 {
-  class RENGA_SCRIPT_EXTERNAL Script
+  class RENGA_SCRIPT_EXTERNAL ScriptRunner
   {
   public:
-    Script(const std::wstring& path);
+    ScriptRunner(const std::wstring& path);
+    bool run();
 
   private:
-    Script() = delete;
+    ScriptRunner() = delete;
 
   private:
     class Impl;
