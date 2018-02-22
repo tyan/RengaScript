@@ -19,5 +19,5 @@ public:
   MetricParameterWrapper(const MetricParameterWrapper& other) = delete;
 
 private:
-  renga_script::MetricParameter* m_pImp;
+  std::unique_ptr<renga_script::MetricParameter> m_pImp;
 };

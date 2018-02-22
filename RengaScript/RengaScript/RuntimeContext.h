@@ -1,31 +1,29 @@
 #pragma once
+#include "ScriptRunner.h"
+
 #include <map>
 
 struct lua_State;
 
-class ScriptData;
-
 namespace renga_script
 {
-  class AbstractParameter;
-  class MetricParameter;
+  class RuntimeContext
+  {
+  public:
+    RuntimeContext(lua_State* pLuaState, const Object3DConstructionContext& context);
+    ~RuntimeContext();
+
+    IParametersDefinition* getParameters() const;
+    IGeometryBuilder* getGeometryBuilder() const;
+
+  public:
+    static RuntimeContext* getContext(lua_State* pLuaState);
+
+  private:
+    lua_State* m_pLuaState;
+    Object3DConstructionContext m_object3DContext;
+
+  private:
+    static std::map<lua_State*, RuntimeContext*> m_registry;
+  };
 }
-
-class RuntimeContext
-{
-public:
-  RuntimeContext(lua_State* pLuaState, ScriptData& data);
-  ~RuntimeContext();
-
-  renga_script::MetricParameter* addMetricParameter(const std::wstring& name, double value);
-
-public:
-  static RuntimeContext* getContext(lua_State* pLuaState);
-
-private:
-  lua_State* m_pLuaState;
-  ScriptData& m_data;
-
-private:
-  static std::map<lua_State*, RuntimeContext*> m_registry;
-};

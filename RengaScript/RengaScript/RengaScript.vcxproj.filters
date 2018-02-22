@@ -38,15 +38,9 @@
     <ClCompile Include="LuaScriptRunner.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source\API</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\Parameter.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeContext.h">
@@ -64,14 +58,23 @@
     <ClInclude Include="LuaScriptRunner.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptData.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\State.h">
+    <ClInclude Include="include\RengaScript\IObject3DDefinition.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="StateImpl.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="include\RengaScript\GeometryTypes2D.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\GeometryTypes3D.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\IGeometryBuilder3D.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\Parameters.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\IParametersDefinition.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,6 +9,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Mocks">
+      <UniqueIdentifier>{e3b4471c-9a58-4efc-a443-4b32eb825778}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -24,6 +27,9 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="IParametersDefinitionMock.h">
+      <Filter>Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

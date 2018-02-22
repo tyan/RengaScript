@@ -1,15 +1,16 @@
 #include "RuntimeContext.h"
-#include "Parameter.h"
+#include "Parameters.h"
 #include "ParameterWrapper.h"
-#include "ScriptData.h"
 
 #include <assert.h>
 
+using namespace renga_script;
+
 std::map<lua_State*, RuntimeContext*> RuntimeContext::m_registry;
 
-RuntimeContext::RuntimeContext(lua_State* pLuaState, ScriptData& data)
+RuntimeContext::RuntimeContext(lua_State* pLuaState, const Object3DConstructionContext& context)
   : m_pLuaState(pLuaState)
-  , m_data(data)
+  , m_object3DContext(context)
 {
   assert(m_pLuaState != nullptr);
   m_registry.insert(std::make_pair(m_pLuaState, this));
@@ -22,12 +23,22 @@ RuntimeContext::~RuntimeContext()
   m_registry.erase(m_pLuaState);
 }
 
-renga_script::MetricParameter * RuntimeContext::addMetricParameter(const std::wstring & name, double value)
+IParametersDefinition * renga_script::RuntimeContext::getParameters() const
 {
-  auto metricParameter = std::make_shared<renga_script::MetricParameter>(name, value);
-  m_data.m_parameters.push_back(metricParameter);
-  return metricParameter.get();
+  return m_object3DContext.pParameters;
 }
+
+IGeometryBuilder * renga_script::RuntimeContext::getGeometryBuilder() const
+{
+  return m_object3DContext.pGeometryBuilder;
+}
+
+//renga_script::MetricParameter * RuntimeContext::addMetricParameter(const std::wstring & name, double value)
+//{
+//  auto metricParameter = std::make_shared<renga_script::MetricParameter>(name, value);
+//  m_data.m_parameters.push_back(metricParameter);
+//  return metricParameter.get();
+//}
 
 RuntimeContext * RuntimeContext::getContext(lua_State * pLuaState)
 {

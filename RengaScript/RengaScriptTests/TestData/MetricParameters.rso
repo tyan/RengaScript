@@ -1,3 +1,0 @@
-length = MetricParameter("Length", 400.0)
-width = MetricParameter("Width", 300.0)
-thickness = MetricParameter("Thickness", 10.0)

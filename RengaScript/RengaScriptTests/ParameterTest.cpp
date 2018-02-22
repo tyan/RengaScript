@@ -1,24 +1,50 @@
 #include "stdafx.h"
+#include <RengaScript/Parameters.h>
 #include <RengaScript/ScriptRunner.h>
 
-void CompareMetricParameter(const renga_script::AbstractParameter* pParameter, 
-                            const wchar_t* expectedName, 
-                            double expectedValue)
-{
-  auto pMetricParameter = dynamic_cast<const renga_script::MetricParameter*>(pParameter);
-  ASSERT_NE(pMetricParameter, nullptr);
-  EXPECT_EQ(pMetricParameter->name(), expectedName);
-  EXPECT_DOUBLE_EQ(pMetricParameter->value(), expectedValue);
-}
+#include "IParametersDefinitionMock.h"
 
-TEST(ParameterTest, shouldReadMetricParameter)
+class ParametersDefinitionTest : public Test
 {
-  renga_script::State state;
-  renga_script::ScriptRunner runner(L".\\TestData\\MetricParameters.rso");
-  ASSERT_TRUE(runner.run(state));
-  ASSERT_EQ(state.getParametersCount(), 3);
+public:
+  renga_script::Object3DConstructionContext createContext(renga_script::IParametersDefinition* pParametersDefinition)
+  {
+    renga_script::Object3DConstructionContext context;
+    context.pParameters = pParametersDefinition;
+    return context;
+  }
   
-  CompareMetricParameter(state.getParameter(0), L"Length", 400);
-  CompareMetricParameter(state.getParameter(1), L"Width", 300);
-  CompareMetricParameter(state.getParameter(2), L"Thickness", 10);
+protected:
+  IParametersDefinitionStrictMock m_parametersStrictMock;
+  IParametersDefinitionNiceMock m_parametersNiceMock;
+};
+
+
+TEST_F(ParametersDefinitionTest, shouldReadMetricParameters)
+{
+  // given
+  renga_script::ScriptRunner runner(L".\\TestData\\LengthAndWidthParameters.rso");
+  renga_script::MetricParameter lengthParameter(L"", 0);
+  renga_script::MetricParameter widthParameter(L"", 0);
+
+  // expect
+  Sequence s;
+  EXPECT_CALL(m_parametersStrictMock, setParameter(_)).
+    InSequence(s).
+    WillOnce(DoAll(SaveArg<0>(&lengthParameter), Return(true)));
+  EXPECT_CALL(m_parametersStrictMock, setParameter(_)).
+    InSequence(s).
+    WillOnce(DoAll(SaveArg<0>(&widthParameter), Return(true)));
+
+  // when
+  bool result = runner.run(createContext(&m_parametersStrictMock));
+  
+  // then
+  EXPECT_EQ(result, true);
+  
+  EXPECT_EQ(lengthParameter.name(), L"Length");
+  EXPECT_DOUBLE_EQ(lengthParameter.value(), 400.0);
+  
+  EXPECT_EQ(widthParameter.name(), L"Width");
+  EXPECT_DOUBLE_EQ(widthParameter.value(), 300.0);
 }

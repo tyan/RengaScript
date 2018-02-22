@@ -1,7 +1,6 @@
 #include <ScriptRunner.h>
 
 #include "LuaScriptRunner.h"
-#include "StateImpl.h"
 
 
 namespace renga_script
@@ -14,10 +13,10 @@ namespace renga_script
     {
     }
 
-    bool run(ScriptData& data)
+    bool run(Object3DConstructionContext context)
     {
       LuaScriptRunner luaRunner;
-      return luaRunner.run(m_path, data);
+      return luaRunner.run(m_path, context);
     }
 
   private:
@@ -28,8 +27,8 @@ namespace renga_script
     : m_pImpl(new Impl(path))
   {}
 
-  bool ScriptRunner::run(State& state)
+  bool ScriptRunner::run(const Object3DConstructionContext& context)
   {
-    return m_pImpl->run(state.m_pImpl->m_data);
+    return m_pImpl->run(context);
   }
 }

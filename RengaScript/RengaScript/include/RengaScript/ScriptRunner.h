@@ -1,16 +1,30 @@
 #pragma once
 #include "ApiDefines.h"
-#include "State.h"
 
 #include <string>
 
 namespace renga_script
 {
+  class IParametersDefinition;
+  class IGeometryBuilder;
+  class IObject3DDefinition;
+}
+
+namespace renga_script
+{
+  class Object3DConstructionContext
+  {
+  public:
+    IParametersDefinition* pParameters = nullptr;
+    IGeometryBuilder* pGeometryBuilder = nullptr;
+    IObject3DDefinition* pObject3DDefinition = nullptr;
+  };
+
   class RENGA_SCRIPT_EXTERNAL ScriptRunner
   {
   public:
     ScriptRunner(const std::wstring& path);
-    bool run(State& state);
+    bool run(const Object3DConstructionContext& context);
 
   private:
     ScriptRunner() = delete;

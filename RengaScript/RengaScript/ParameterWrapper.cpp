@@ -1,12 +1,15 @@
 #include "ParameterWrapper.h"
 #include "RuntimeContext.h"
 #include "StringConvertion.h"
+#include "IParametersDefinition.h"
 
 #include <assert.h>
 
 #include <lua.hpp>
 
 #include <LuaBridge.h>
+
+using namespace renga_script;
 
 void MetricParameterWrapper::RegisterType(lua_State * pLuaState)
 {
@@ -23,5 +26,11 @@ MetricParameterWrapper::MetricParameterWrapper(char const* name, double defaultV
 
   auto pContext = RuntimeContext::getContext(pLuaState);
   assert(pContext != nullptr);
-  m_pImp = pContext->addMetricParameter(paramName, paramValue);
+  
+  auto pParameters = pContext->getParameters();
+  if (pParameters == nullptr)
+    throw "Parameters functionality not supported!";
+
+  m_pImp = std::make_unique<renga_script::MetricParameter>(paramName, paramValue);
+  pParameters->setParameter(*m_pImp);
 }

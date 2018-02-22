@@ -4,6 +4,8 @@
 
 #include <lua.hpp>
 
+using namespace renga_script;
+
 LuaScriptRunner::LuaScriptRunner()
 {
   m_pLuaState = luaL_newstate();   /* opens Lua */
@@ -15,9 +17,9 @@ LuaScriptRunner::~LuaScriptRunner()
   lua_close(m_pLuaState);
 }
 
-bool LuaScriptRunner::run(const std::wstring& luaScriptPath, ScriptData& data)
+bool LuaScriptRunner::run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context)
 {
-  RuntimeContext context(m_pLuaState, data);
+  RuntimeContext runtimeContext(m_pLuaState, context);
   try
   {
     if (0 != luaL_loadfile(m_pLuaState, convertString(luaScriptPath).c_str()))
@@ -33,7 +35,7 @@ bool LuaScriptRunner::run(const std::wstring& luaScriptPath, ScriptData& data)
   }
   catch (...)
   {
-    // TODO: report error [tyan
+    // TODO: report error [tyan]
     return false;
   }
   return true;

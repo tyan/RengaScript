@@ -3,7 +3,10 @@
 
 struct lua_State;
 
-class ScriptData;
+namespace renga_script
+{
+	class Object3DConstructionContext;
+}
 
 class LuaScriptRunner
 {
@@ -11,7 +14,7 @@ public:
   LuaScriptRunner();
   ~LuaScriptRunner();
 
-  bool run(const std::wstring& luaScriptPath, ScriptData& data);
+  bool run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context);
 
 private:
   lua_State* m_pLuaState;
