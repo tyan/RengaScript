@@ -1,5 +1,6 @@
 #include "RuntimeContext.h"
-#include "Parameters.h"
+#include <RengaScript/Parameter.h>
+
 #include "ParameterWrapper.h"
 
 #include <assert.h>
@@ -23,7 +24,7 @@ RuntimeContext::~RuntimeContext()
   m_registry.erase(m_pLuaState);
 }
 
-IParametersDefinition * renga_script::RuntimeContext::getParameters() const
+IParametersService * renga_script::RuntimeContext::getParameters() const
 {
   return m_object3DContext.pParameters;
 }

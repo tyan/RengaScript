@@ -1,7 +1,6 @@
 #pragma once
 
-#include "ApiDefines.h"
-
+#include <RengaScript/ApiDefines.h>
 #include <string>
 
 namespace renga_script

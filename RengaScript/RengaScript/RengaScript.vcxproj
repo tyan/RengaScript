@@ -55,7 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>RENGA_SCRIPT_LIBRARY;_DEBUG;_WINDOWS;_USRDLL;RENGASCRIPT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\LuaBridge;..\..\lua-5.3.3\src;.\include\RengaScript;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\LuaBridge;..\..\lua-5.3.3\src;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -73,7 +73,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>RENGA_SCRIPT_LIBRARY;NDEBUG;_WINDOWS;_USRDLL;RENGASCRIPT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\LuaBridge;..\..\lua-5.3.3\src;.\include\RengaScript;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\LuaBridge;..\..\lua-5.3.3\src;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -89,12 +89,12 @@
     <ClInclude Include="include\RengaScript\GeometryTypes3D.h" />
     <ClInclude Include="include\RengaScript\IGeometryBuilder3D.h" />
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h" />
-    <ClInclude Include="include\RengaScript\IParametersDefinition.h" />
+    <ClInclude Include="include\RengaScript\IParametersService.h" />
     <ClInclude Include="LuaScriptRunner.h" />
     <ClInclude Include="ParameterWrapper.h" />
     <ClInclude Include="RuntimeContext.h" />
     <ClInclude Include="include\RengaScript\ApiDefines.h" />
-    <ClInclude Include="include\RengaScript\Parameters.h" />
+    <ClInclude Include="include\RengaScript\Parameter.h" />
     <ClInclude Include="include\RengaScript\ScriptRunner.h" />
     <ClInclude Include="StringConvertion.h" />
   </ItemGroup>

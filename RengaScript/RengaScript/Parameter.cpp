@@ -1,4 +1,4 @@
-#include <Parameters.h>
+#include <RengaScript/Parameter.h>
 
 namespace renga_script
 {

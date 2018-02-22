@@ -86,7 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="IParametersDefinitionMock.h" />
+    <ClInclude Include="ParametersServiceMock.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

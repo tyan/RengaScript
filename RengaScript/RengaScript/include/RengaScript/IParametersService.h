@@ -1,9 +1,9 @@
 #pragma once
-#include "Parameters.h"
+#include <RengaScript/Parameter.h>
 
 namespace renga_script
 {
-  class IParametersDefinition
+  class IParametersService
   {
   public:
     virtual bool setParameter(MetricParameter& parameter) = 0;

@@ -1,7 +1,8 @@
 #include "ParameterWrapper.h"
 #include "RuntimeContext.h"
 #include "StringConvertion.h"
-#include "IParametersDefinition.h"
+
+#include <RengaScript/IParametersService.h>
 
 #include <assert.h>
 

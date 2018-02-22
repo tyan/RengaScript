@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include <RengaScript/Parameters.h>
+#include <RengaScript/Parameter.h>
 #include <RengaScript/ScriptRunner.h>
 
-#include "IParametersDefinitionMock.h"
+#include "ParametersServiceMock.h"
 
 class ParametersDefinitionTest : public Test
 {
 public:
-  renga_script::Object3DConstructionContext createContext(renga_script::IParametersDefinition* pParametersDefinition)
+  renga_script::Object3DConstructionContext createContext(renga_script::IParametersService* pParametersService)
   {
     renga_script::Object3DConstructionContext context;
-    context.pParameters = pParametersDefinition;
+    context.pParameters = pParametersService;
     return context;
   }
   
 protected:
-  IParametersDefinitionStrictMock m_parametersStrictMock;
-  IParametersDefinitionNiceMock m_parametersNiceMock;
+  IParametersServiceStrictMock m_parametersStrictMock;
+  IParametersServiceNiceMock m_parametersNiceMock;
 };
 
 

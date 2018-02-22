@@ -28,7 +28,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="IParametersDefinitionMock.h">
+    <ClInclude Include="ParametersServiceMock.h">
       <Filter>Mocks</Filter>
     </ClInclude>
   </ItemGroup>

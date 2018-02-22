@@ -1,11 +1,11 @@
 #pragma once
-#include "ApiDefines.h"
+#include <RengaScript/ApiDefines.h>
 
 #include <string>
 
 namespace renga_script
 {
-  class IParametersDefinition;
+  class IParametersService;
   class IGeometryBuilder;
   class IObject3DDefinition;
 }
@@ -15,7 +15,7 @@ namespace renga_script
   class Object3DConstructionContext
   {
   public:
-    IParametersDefinition* pParameters = nullptr;
+    IParametersService* pParameters = nullptr;
     IGeometryBuilder* pGeometryBuilder = nullptr;
     IObject3DDefinition* pObject3DDefinition = nullptr;
   };

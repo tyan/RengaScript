@@ -1,4 +1,4 @@
-#include <ScriptRunner.h>
+#include <RengaScript/ScriptRunner.h>
 
 #include "LuaScriptRunner.h"
 

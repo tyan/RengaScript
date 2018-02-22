@@ -1,5 +1,4 @@
 #pragma once
-#include "Parameter.h"
 
 namespace renga_script
 {

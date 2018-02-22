@@ -70,10 +70,10 @@
     <ClInclude Include="include\RengaScript\IGeometryBuilder3D.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\RengaScript\Parameters.h">
+    <ClInclude Include="include\RengaScript\Parameter.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\RengaScript\IParametersDefinition.h">
+    <ClInclude Include="include\RengaScript\IParametersService.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

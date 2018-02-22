@@ -1,5 +1,5 @@
 #pragma once
-#include "ScriptRunner.h"
+#include <RengaScript/ScriptRunner.h>
 
 #include <map>
 
@@ -13,7 +13,7 @@ namespace renga_script
     RuntimeContext(lua_State* pLuaState, const Object3DConstructionContext& context);
     ~RuntimeContext();
 
-    IParametersDefinition* getParameters() const;
+    IParametersService* getParameters() const;
     IGeometryBuilder* getGeometryBuilder() const;
 
   public:
