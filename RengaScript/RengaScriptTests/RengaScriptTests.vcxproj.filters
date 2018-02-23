@@ -20,7 +20,7 @@
     <ClCompile Include="RengaScriptTests.cpp">
       <Filter>Module</Filter>
     </ClCompile>
-    <ClCompile Include="ParameterTest.cpp">
+    <ClCompile Include="ParametersTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

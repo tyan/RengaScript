@@ -1,34 +1,36 @@
 #include "LuaScriptRunner.h"
 #include "StringConvertion.h"
-#include "RuntimeContext.h"
+#include "LuaScriptRuntimeContext.h"
 
 #include <lua.hpp>
 
 using namespace renga_script;
+using namespace lua;
 
-LuaScriptRunner::LuaScriptRunner()
+ScriptRunner::ScriptRunner()
 {
   m_pLuaState = luaL_newstate();   /* opens Lua */
   luaL_openlibs(m_pLuaState);      /* opens the basic library */
 }
 
-LuaScriptRunner::~LuaScriptRunner()
+ScriptRunner::~ScriptRunner()
 {
   lua_close(m_pLuaState);
 }
 
-bool LuaScriptRunner::run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context)
+bool ScriptRunner::run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context)
 {
-  RuntimeContext runtimeContext(m_pLuaState, context);
   try
   {
+    ScriptRuntimeContext runtimeContext(m_pLuaState, context);
+
     if (0 != luaL_loadfile(m_pLuaState, convertString(luaScriptPath).c_str()))
-      throw "Cannot find file!\n";
+      throw L"Cannot find file!";
 
     if (0 != lua_pcall(m_pLuaState, 0, 0, 0))
-      throw "Cannot run file!\n";
+      throw L"Cannot run file!";
   }
-  catch (const char*)
+  catch (const std::wstring&)
   {
     // TODO: report error [tyan]
     return false;

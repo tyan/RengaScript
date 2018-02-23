@@ -9,54 +9,48 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Source\ScriptWrapper">
-      <UniqueIdentifier>{cd9147f2-92c6-40b1-8f67-df90a4c148e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\API">
       <UniqueIdentifier>{c5a1ebd0-0ae6-4d71-bc9d-13dbeb15280c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Lua">
+      <UniqueIdentifier>{0c7fa576-57ff-480c-a34b-22e89266b4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Lua\TypesRegistration">
+      <UniqueIdentifier>{cd9147f2-92c6-40b1-8f67-df90a4c148e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Module">
+      <UniqueIdentifier>{7261a0ca-b95a-4668-9dd5-8bbb4e7fc040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Common">
+      <UniqueIdentifier>{7b2f0de6-ee9a-48df-b266-e925c816ec22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="RuntimeContext.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="ParameterWrapper.cpp">
-      <Filter>Source\ScriptWrapper</Filter>
-    </ClCompile>
     <ClCompile Include="Parameter.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
-    <ClCompile Include="StringConvertion.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptRunner.cpp">
-      <Filter>Source\API</Filter>
+    <ClCompile Include="LuaTypesRegistration.cpp">
+      <Filter>Source\Lua\TypesRegistration</Filter>
     </ClCompile>
     <ClCompile Include="LuaScriptRunner.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="StringConvertion.cpp">
+      <Filter>Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaScriptRuntimeContext.cpp">
+      <Filter>Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecuteScript.cpp">
+      <Filter>Source\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
       <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="RuntimeContext.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="ParameterWrapper.h">
-      <Filter>Source\ScriptWrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="StringConvertion.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\ScriptRunner.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaScriptRunner.h">
-      <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h">
       <Filter>Include</Filter>
@@ -74,6 +68,21 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\IParametersService.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScriptRunner.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaTypesRegistration.h">
+      <Filter>Source\Lua\TypesRegistration</Filter>
+    </ClInclude>
+    <ClInclude Include="StringConvertion.h">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScriptRuntimeContext.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\ExecuteScript.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

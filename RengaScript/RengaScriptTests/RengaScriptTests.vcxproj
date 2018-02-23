@@ -90,7 +90,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ParameterTest.cpp" />
+    <ClCompile Include="ParametersTest.cpp" />
     <ClCompile Include="RengaScriptTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

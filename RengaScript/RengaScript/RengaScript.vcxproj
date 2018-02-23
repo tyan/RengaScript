@@ -91,17 +91,17 @@
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h" />
     <ClInclude Include="include\RengaScript\IParametersService.h" />
     <ClInclude Include="LuaScriptRunner.h" />
-    <ClInclude Include="ParameterWrapper.h" />
-    <ClInclude Include="RuntimeContext.h" />
+    <ClInclude Include="LuaTypesRegistration.h" />
+    <ClInclude Include="LuaScriptRuntimeContext.h" />
     <ClInclude Include="include\RengaScript\ApiDefines.h" />
     <ClInclude Include="include\RengaScript\Parameter.h" />
-    <ClInclude Include="include\RengaScript\ScriptRunner.h" />
+    <ClInclude Include="include\RengaScript\ExecuteScript.h" />
     <ClInclude Include="StringConvertion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LuaScriptRunner.cpp" />
-    <ClCompile Include="ParameterWrapper.cpp" />
-    <ClCompile Include="RuntimeContext.cpp" />
+    <ClCompile Include="LuaTypesRegistration.cpp" />
+    <ClCompile Include="LuaScriptRuntimeContext.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -109,7 +109,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Parameter.cpp" />
-    <ClCompile Include="ScriptRunner.cpp">
+    <ClCompile Include="ExecuteScript.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
