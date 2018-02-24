@@ -59,3 +59,15 @@ TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
   // then
   EXPECT_EQ(result, false);
 }
+
+TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
+{
+  // given
+  ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(false));
+
+  // when
+  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", createContext(nullptr));
+
+  // then
+  EXPECT_EQ(result, false);
+}
