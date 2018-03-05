@@ -1,9 +1,0 @@
-length = MetricParameter("Length", 400.0)
-width = MetricParameter("Width", 300.0)
-thickness = MetricParameter("Thickness", 10.0)
-
--- creating 2D sketch ro extrusion
-scetch = Rect(0, 0, length, width)
-body = Extrusion(scetch, thickness, 0.0)
-
---body.Rotate(angle)

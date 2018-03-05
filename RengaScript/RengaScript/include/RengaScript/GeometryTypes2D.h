@@ -9,20 +9,14 @@ namespace renga_script
     double y;
   };
 
-
-  class LineSegment
+  class ICurve2D
   {
   public:
-    Point2D p1;
-    Point2D p2;
+    virtual ~ICurve2D() {};
   };
 
-  class Arc
+  class IRect : public ICurve2D
   {
   public:
-    Point2D c;
-    double angle1;
-    double angle2;
-    bool isClockwise;
   };
 }

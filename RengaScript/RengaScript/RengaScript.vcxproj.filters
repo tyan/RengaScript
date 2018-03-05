@@ -58,16 +58,7 @@
     <ClInclude Include="include\RengaScript\GeometryTypes2D.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\RengaScript\GeometryTypes3D.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\IGeometryBuilder3D.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="include\RengaScript\Parameter.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\IParametersService.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="LuaScriptRunner.h">
@@ -83,6 +74,12 @@
       <Filter>Source\Lua</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\ExecuteScript.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\IGeometry2DBuilder.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\IParameters.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,8 +14,8 @@ namespace lua
     ScriptRuntimeContext(lua_State* pLuaState, const renga_script::Object3DConstructionContext& context);
     ~ScriptRuntimeContext();
 
-    renga_script::IParametersService* getParameters() const;
-    renga_script::IGeometryBuilder* getGeometryBuilder() const;
+    renga_script::IParameters* getParameters() const;
+    renga_script::IGeometry2DBuilder* getGeometry2DBuilder() const;
 
   public:
     static ScriptRuntimeContext* getContext(lua_State* pLuaState);

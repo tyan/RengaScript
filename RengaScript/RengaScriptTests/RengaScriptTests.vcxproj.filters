@@ -23,12 +23,21 @@
     <ClCompile Include="ParametersTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Geometry2DBuilderTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="ParametersServiceMock.h">
+    <ClInclude Include="Geometry2DTypeMock.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry2DBuilderMock.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="ParametersMock.h">
       <Filter>Mocks</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,7 +3,7 @@
 
 namespace renga_script
 {
-  class IParametersService
+  class IParameters
   {
   public:
     virtual bool setParameter(MetricParameter& parameter) = 0;

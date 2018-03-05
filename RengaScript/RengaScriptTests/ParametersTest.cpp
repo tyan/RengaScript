@@ -2,21 +2,21 @@
 #include <RengaScript/Parameter.h>
 #include <RengaScript/ExecuteScript.h>
 
-#include "ParametersServiceMock.h"
+#include "ParametersMock.h"
 
 class ParametersTest : public Test
 {
 public:
-  renga_script::Object3DConstructionContext createContext(renga_script::IParametersService* pParametersService)
+  void setUpParameters(renga_script::IParameters* pService)
   {
-    renga_script::Object3DConstructionContext context;
-    context.pParameters = pParametersService;
-    return context;
+    m_context.pParameters = pService;
   }
-  
+
 protected:
-  IParametersServiceStrictMock m_parametersStrictMock;
-  IParametersServiceNiceMock m_parametersNiceMock;
+  renga_script::Object3DConstructionContext m_context;
+
+  ParametersStrict m_parametersStrictMock;
+  ParametersNice m_parametersNiceMock;
 };
 
 
@@ -25,6 +25,8 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
   // given
   renga_script::MetricParameter lengthParameter(L"", 0);
   renga_script::MetricParameter widthParameter(L"", 0);
+  
+  setUpParameters(&m_parametersStrictMock);
 
   // expect
   Sequence s;
@@ -36,7 +38,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
     WillOnce(DoAll(SaveArg<0>(&widthParameter), Return(true)));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", createContext(&m_parametersStrictMock));
+  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
   
   // then
   EXPECT_EQ(result, true);
@@ -51,10 +53,11 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
 TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
 {
   // given
-  ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(false));
+  setUpParameters(&m_parametersNiceMock);
+  ON_CALL(m_parametersNiceMock, setParameter(_)).WillByDefault(Return(false));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", createContext(&m_parametersNiceMock));
+  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
 
   // then
   EXPECT_EQ(result, false);
@@ -66,7 +69,7 @@ TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
   ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(true));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", createContext(nullptr));
+  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
 
   // then
   EXPECT_EQ(result, false);

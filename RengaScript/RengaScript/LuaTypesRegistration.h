@@ -6,5 +6,7 @@ struct lua_State;
 
 namespace lua
 {
-  void registerParameterType(lua_State* pLuaState);
+  void registerMetricParameterType(lua_State* pLuaState);
+
+  void registerRectType(lua_State* pLuaState);
 }

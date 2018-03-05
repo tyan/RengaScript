@@ -17,7 +17,8 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
   assert(m_pLuaState != nullptr);
   m_registry.insert(std::make_pair(m_pLuaState, this));
 
-  lua::registerParameterType(m_pLuaState);
+  lua::registerMetricParameterType(m_pLuaState);
+  lua::registerRectType(m_pLuaState);
 }
 
 ScriptRuntimeContext::~ScriptRuntimeContext()
@@ -25,14 +26,14 @@ ScriptRuntimeContext::~ScriptRuntimeContext()
   m_registry.erase(m_pLuaState);
 }
 
-IParametersService * ScriptRuntimeContext::getParameters() const
+IParameters * ScriptRuntimeContext::getParameters() const
 {
   return m_object3DContext.pParameters;
 }
 
-IGeometryBuilder * ScriptRuntimeContext::getGeometryBuilder() const
+IGeometry2DBuilder * ScriptRuntimeContext::getGeometry2DBuilder() const
 {
-  return m_object3DContext.pGeometryBuilder;
+  return m_object3DContext.pGeometryBuilder2D;
 }
 
 ScriptRuntimeContext * ScriptRuntimeContext::getContext(lua_State * pLuaState)
