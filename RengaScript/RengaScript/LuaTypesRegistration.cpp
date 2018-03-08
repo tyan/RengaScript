@@ -37,6 +37,7 @@ void lua::registerMetricParameterType(lua_State * pLuaState)
 {
   luabridge::getGlobalNamespace(pLuaState)
     .beginClass <renga_script::MetricParameter>("MetricParameterClass")
+    .addProperty("value", &renga_script::MetricParameter::value, &renga_script::MetricParameter::setValue)
     .endClass();
 
   luabridge::getGlobalNamespace(pLuaState)
