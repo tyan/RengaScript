@@ -20,8 +20,9 @@ namespace renga_script
     IGeometry2DBuilder* pGeometryBuilder2D = nullptr;
     IGeometry3DBuilder* pGeometryBuilder3D = nullptr;
     IObject3DDefinition* pObject3DDefinition = nullptr;
+    std::wstring error;
   };
 
   RENGA_SCRIPT_EXTERNAL bool executeScript(const std::wstring& path, 
-                                           const Object3DConstructionContext& context);
+                                           Object3DConstructionContext& context);
 }

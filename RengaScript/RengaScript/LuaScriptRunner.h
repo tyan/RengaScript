@@ -16,7 +16,11 @@ namespace lua
     ScriptRunner();
     ~ScriptRunner();
 
-    bool run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context);
+    bool run(const std::wstring& luaScriptPath, renga_script::Object3DConstructionContext& context);
+
+  private:
+    void executeScript(const std::wstring& path);
+    void loadLibraryFiles();
 
   private:
     lua_State* m_pLuaState;

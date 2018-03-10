@@ -18,27 +18,42 @@ ScriptRunner::~ScriptRunner()
   lua_close(m_pLuaState);
 }
 
-bool ScriptRunner::run(const std::wstring& luaScriptPath, const renga_script::Object3DConstructionContext& context)
+bool ScriptRunner::run(const std::wstring& luaScriptPath, renga_script::Object3DConstructionContext& context)
 {
   try
   {
     ScriptRuntimeContext runtimeContext(m_pLuaState, context);
-
-    if (0 != luaL_loadfile(m_pLuaState, convertString(luaScriptPath).c_str()))
-      throw L"Cannot find file!";
-
-    if (0 != lua_pcall(m_pLuaState, 0, 0, 0))
-      throw L"Cannot run file!";
+    loadLibraryFiles();
+    executeScript(luaScriptPath);
   }
-  catch (const std::wstring&)
+  catch (const std::wstring& error)
   {
-    // TODO: report error [tyan]
+    context.error = error;
     return false;
   }
   catch (...)
   {
-    // TODO: report error [tyan]
+    context.error = L"Unknown error";
     return false;
   }
   return true;
+}
+
+void ScriptRunner::executeScript(const std::wstring & path)
+{
+  if (0 != luaL_loadfile(m_pLuaState, convertString(path).c_str()))
+  {
+    const char* errorMessage = lua_tostring(m_pLuaState, -1);
+    throw std::wstring(L"Error while loading script: ") + path + std::wstring(L", Error message: ") + convertString(errorMessage);
+  }
+
+  if (0 != lua_pcall(m_pLuaState, 0, 0, 0))
+  {
+    const char* errorMessage = lua_tostring(m_pLuaState, -1);
+    throw std::wstring(L"Error while executing script: ") + path + std::wstring(L", Error message: ") + convertString(errorMessage);
+  }
+}
+
+void lua::ScriptRunner::loadLibraryFiles()
+{
 }
