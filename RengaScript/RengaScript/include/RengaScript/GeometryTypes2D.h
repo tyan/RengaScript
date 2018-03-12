@@ -19,4 +19,7 @@ namespace renga_script
   {
   public:
   };
+
+  class IPolygon : public ICurve2D
+  {};
 }

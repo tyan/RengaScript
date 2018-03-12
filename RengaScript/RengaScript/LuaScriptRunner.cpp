@@ -1,6 +1,7 @@
 #include "LuaScriptRunner.h"
 #include "StringConvertion.h"
 #include "LuaScriptRuntimeContext.h"
+#include "Path.h"
 
 #include <lua.hpp>
 
@@ -56,4 +57,6 @@ void ScriptRunner::executeScript(const std::wstring & path)
 
 void lua::ScriptRunner::loadLibraryFiles()
 {
+  std::wstring libraryScriptDir = getDllDir() + L"\\LibraryScript";
+  executeScript(libraryScriptDir + L"\\Geometry2DLib.lua");
 }

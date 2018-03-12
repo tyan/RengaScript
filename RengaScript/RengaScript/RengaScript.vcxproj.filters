@@ -47,6 +47,9 @@
     <ClCompile Include="ExecuteScript.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Source\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">
@@ -81,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="include\RengaScript\IParameters.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>Source\Module</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
