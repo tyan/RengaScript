@@ -12,6 +12,9 @@
     <Filter Include="Mocks">
       <UniqueIdentifier>{e3b4471c-9a58-4efc-a443-4b32eb825778}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Stubs">
+      <UniqueIdentifier>{6373b84b-96bd-42bc-a32e-44c5c23e1bdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
     </ClInclude>
     <ClInclude Include="ParametersMock.h">
       <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry2DTypeStub.h">
+      <Filter>Stubs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

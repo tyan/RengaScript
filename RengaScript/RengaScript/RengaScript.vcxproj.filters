@@ -24,6 +24,9 @@
     <Filter Include="Source\Common">
       <UniqueIdentifier>{7b2f0de6-ee9a-48df-b266-e925c816ec22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Lua\TypeWrapper">
+      <UniqueIdentifier>{8d106779-b40f-4163-8ecb-4e1a4d05b2ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parameter.cpp">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Path.cpp">
       <Filter>Source\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry2DTypeWrapper.cpp">
+      <Filter>Source\Lua\TypeWrapper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="dllmain.h">
       <Filter>Source\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry2DTypeWrapper.h">
+      <Filter>Source\Lua\TypeWrapper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

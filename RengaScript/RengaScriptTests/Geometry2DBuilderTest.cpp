@@ -4,7 +4,7 @@
 
 #include "ParametersMock.h"
 #include "Geometry2DBuilderMock.h"
-#include "Geometry2DTypeMock.h"
+#include "Geometry2DTypeStub.h"
 
 class Geometry2DBuilderTest : public Test
 {
@@ -36,7 +36,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRect)
 
   // expect
   EXPECT_CALL(m_geometry2DStrictMock, createRect(0, 0, 200, 300)).
-    WillOnce(Return(new RectMock()));
+    WillOnce(Return(new Curve2DStub()));
 
   // when
   bool result = renga_script::executeScript(L".\\TestData\\Rect200x300.rso", m_context);

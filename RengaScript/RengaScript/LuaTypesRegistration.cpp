@@ -1,6 +1,7 @@
 #include "LuaTypesRegistration.h"
 #include "LuaScriptRuntimeContext.h"
 #include "StringConvertion.h"
+#include "Geometry2DTypeWrapper.h"
 
 #include <RengaScript/IParameters.h>
 #include <RengaScript/IGeometry2DBuilder.h>
@@ -11,57 +12,62 @@
 
 #include <LuaBridge.h>
 
+
 using namespace renga_script;
 
-MetricParameter metricParameterConstruct(char const* name, double defaultValue, lua_State * pLuaState)
+namespace lua
 {
-  std::wstring paramName = convertString(name);
-  double paramValue = defaultValue;
 
-  auto pContext = lua::ScriptRuntimeContext::getContext(pLuaState);
-  assert(pContext != nullptr);
+  MetricParameter metricParameterConstruct(char const* name, double defaultValue, lua_State * pLuaState)
+  {
+    std::wstring paramName = convertString(name);
+    double paramValue = defaultValue;
 
-  auto pParameters = pContext->getParameters();
-  if (pParameters == nullptr)
-    throw L"Parameters interface is not supported!";
+    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
+    assert(pContext != nullptr);
 
-  MetricParameter result(paramName, paramValue);
-  bool parameterWasSet = pParameters->setParameter(result);
-  if (parameterWasSet == false)
-    throw std::wstring(L"Failed to set parameter: ") + paramName;
+    auto pParameters = pContext->getParameters();
+    if (pParameters == nullptr)
+      throw L"Parameters interface is not supported!";
 
-  return result;
-}
+    MetricParameter result(paramName, paramValue);
+    bool parameterWasSet = pParameters->setParameter(result);
+    if (parameterWasSet == false)
+      throw std::wstring(L"Failed to set parameter: ") + paramName;
 
-void lua::registerMetricParameterType(lua_State * pLuaState)
-{
-  luabridge::getGlobalNamespace(pLuaState)
-    .beginClass <renga_script::MetricParameter>("MetricParameterClass")
-    .addProperty("value", &renga_script::MetricParameter::value, &renga_script::MetricParameter::setValue)
-    .endClass();
+    return result;
+  }
 
-  luabridge::getGlobalNamespace(pLuaState)
-    .addFunction("MetricParameter", metricParameterConstruct);
-}
+  void registerMetricParameterType(lua_State * pLuaState)
+  {
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <renga_script::MetricParameter>("MetricParameterClass")
+      .addProperty("value", &renga_script::MetricParameter::value, &renga_script::MetricParameter::setValue)
+      .endClass();
 
-std::shared_ptr<renga_script::IRect> rectConstruct(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
-{
-  auto pContext = lua::ScriptRuntimeContext::getContext(pLuaState);
-  assert(pContext != nullptr);
+    luabridge::getGlobalNamespace(pLuaState)
+      .addFunction("MetricParameter", metricParameterConstruct);
+  }
 
-  auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-  if (pGeometry2DBuilder == nullptr)
-    throw L"Geometry 2D builder interface is not supported!";
+  Curve2DWrapper rectConstruct(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
+  {
+    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
+    assert(pContext != nullptr);
 
-  return std::shared_ptr<renga_script::IRect>(pGeometry2DBuilder->createRect(lbx, lby, rtx, rty));
-}
+    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
+    if (pGeometry2DBuilder == nullptr)
+      throw L"Geometry 2D builder interface is not supported!";
 
-void lua::registerRectType(lua_State * pLuaState)
-{
-  luabridge::getGlobalNamespace(pLuaState)
-    .beginClass <std::shared_ptr<renga_script::IRect>>("RectClass")
-    .endClass();
+    return Curve2DWrapper(pGeometry2DBuilder->createRect(lbx, lby, rtx, rty));
+  }
 
-  luabridge::getGlobalNamespace(pLuaState)
-    .addFunction("Rect", rectConstruct);
+  void registerRectType(lua_State * pLuaState)
+  {
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <Curve2DWrapper>("Curve2DClass")
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
+      .addFunction("Rect", rectConstruct);
+  }
 }

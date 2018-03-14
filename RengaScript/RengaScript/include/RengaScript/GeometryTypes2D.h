@@ -13,13 +13,6 @@ namespace renga_script
   {
   public:
     virtual ~ICurve2D() {};
+    virtual ICurve2D* copy() = 0;
   };
-
-  class IRect : public ICurve2D
-  {
-  public:
-  };
-
-  class IPolygon : public ICurve2D
-  {};
 }

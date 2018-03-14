@@ -92,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h" />
+    <ClInclude Include="Geometry2DTypeWrapper.h" />
     <ClInclude Include="include\RengaScript\GeometryTypes2D.h" />
     <ClInclude Include="include\RengaScript\IGeometry2DBuilder.h" />
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="StringConvertion.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Geometry2DTypeWrapper.cpp" />
     <ClCompile Include="LuaScriptRunner.cpp" />
     <ClCompile Include="LuaTypesRegistration.cpp" />
     <ClCompile Include="LuaScriptRuntimeContext.cpp" />

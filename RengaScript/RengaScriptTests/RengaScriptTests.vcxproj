@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="Geometry2DBuilderMock.h" />
     <ClInclude Include="Geometry2DTypeMock.h" />
+    <ClInclude Include="Geometry2DTypeStub.h" />
     <ClInclude Include="ParametersMock.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

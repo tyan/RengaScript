@@ -4,7 +4,7 @@
 class Geometry2DBuilderMock : public renga_script::IGeometry2DBuilder
 {
 public:
-  MOCK_METHOD4(createRect, renga_script::IRect*(double lbx, double lby, double rtx, double rty));
+  MOCK_METHOD4(createRect, renga_script::ICurve2D*(double lbx, double lby, double rtx, double rty));
 };
 
 typedef NiceMock<Geometry2DBuilderMock> Geometry2DBuilderNice;
