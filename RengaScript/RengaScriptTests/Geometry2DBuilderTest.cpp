@@ -29,7 +29,7 @@ protected:
   ParametersNice m_parametersNiceMock;
 };
 
-TEST_F(Geometry2DBuilderTest, shouldCreateRect)
+TEST_F(Geometry2DBuilderTest, shouldCreateRectByCoordinates)
 {
   // given
   setUpGeometry2DBuilder(&m_geometry2DStrictMock);
@@ -40,4 +40,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRect)
 
   // when
   bool result = renga_script::executeScript(L".\\TestData\\Rect200x300.rso", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
 }

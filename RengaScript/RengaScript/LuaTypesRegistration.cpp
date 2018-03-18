@@ -49,7 +49,7 @@ namespace lua
       .addFunction("MetricParameter", metricParameterConstruct);
   }
 
-  Curve2DWrapper rectConstruct(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
+  Curve2DWrapper rectConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
   {
     auto pContext = ScriptRuntimeContext::getContext(pLuaState);
     assert(pContext != nullptr);
@@ -68,6 +68,6 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
-      .addFunction("Rect", rectConstruct);
+      .addFunction("RectByCoord", rectConstructByCoord);
   }
 }

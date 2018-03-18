@@ -64,6 +64,9 @@
       <AdditionalLibraryDirectories>..\..\googletest-release-1.8.0\gtest\lib\x64\Debug;..\..\googletest-release-1.8.0\gmock\lib\x64\Debug;%(AdditionalLibraryDirectories);$(OutDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>RengaScript.lib;gtestd.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>XCOPY ..\RengaScript\LibraryScript\*.lua $(OutDir)\LibraryScript /s /i /y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -84,6 +87,9 @@
       <AdditionalDependencies>RengaScript.lib;gtest.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\googletest-release-1.8.0\gtest\lib\x64\Release;..\..\googletest-release-1.8.0\gmock\lib\x64\Release;%(AdditionalLibraryDirectories);$(OutDir)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>XCOPY ..\RengaScript\LibraryScript\*.lua $(OutDir)\LibraryScript /s /i /y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Geometry2DBuilderMock.h" />
