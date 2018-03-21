@@ -44,3 +44,19 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByCoordinates)
   // then
   EXPECT_TRUE(result) << m_context.error;
 }
+
+TEST_F(Geometry2DBuilderTest, shouldCreateRectByPoints)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+
+  // expect
+  EXPECT_CALL(m_geometry2DStrictMock, createRect(0, 0, 200, 300)).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = renga_script::executeScript(L".\\TestData\\Rect200x300ByPoints.rso", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}

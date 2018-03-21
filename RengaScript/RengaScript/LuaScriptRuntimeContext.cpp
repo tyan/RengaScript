@@ -18,6 +18,7 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
   m_registry.insert(std::make_pair(m_pLuaState, this));
 
   lua::registerMetricParameterType(m_pLuaState);
+  lua::registerPoint2D(m_pLuaState);
   lua::registerRectType(m_pLuaState);
 }
 

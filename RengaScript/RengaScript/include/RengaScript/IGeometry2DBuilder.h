@@ -7,5 +7,6 @@ namespace renga_script
   {
   public:
     virtual ICurve2D* createRect(double lbx, double lby, double rtx, double rty) = 0;
+    virtual ICurve2D* createRect(const Point2D& lb, const Point2D& rt) = 0;
   };
 }

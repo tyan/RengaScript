@@ -7,6 +7,7 @@ struct lua_State;
 namespace lua
 {
   void registerMetricParameterType(lua_State* pLuaState);
-
+  
+  void registerPoint2D(lua_State * pLuaState);
   void registerRectType(lua_State* pLuaState);
 }
