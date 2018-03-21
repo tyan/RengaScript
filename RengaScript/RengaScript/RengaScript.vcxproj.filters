@@ -56,6 +56,9 @@
     <ClCompile Include="Geometry2DTypeWrapper.cpp">
       <Filter>Source\Lua\TypeWrapper</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryTypes2D.cpp">
+      <Filter>Source\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RengaScript\ApiDefines.h">

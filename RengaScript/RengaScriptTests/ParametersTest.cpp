@@ -7,13 +7,13 @@
 class ParametersTest : public Test
 {
 public:
-  void setUpParameters(renga_script::IParameters* pService)
+  void setUpParameters(IParameters* pService)
   {
     m_context.pParameters = pService;
   }
 
 protected:
-  renga_script::Object3DConstructionContext m_context;
+  Object3DConstructionContext m_context;
 
   ParametersStrict m_parametersStrictMock;
   ParametersNice m_parametersNiceMock;
@@ -23,8 +23,8 @@ protected:
 TEST_F(ParametersTest, shouldReadMetricParameters)
 {
   // given
-  renga_script::MetricParameter lengthParameter(L"", 0);
-  renga_script::MetricParameter widthParameter(L"", 0);
+  MetricParameter lengthParameter(L"", 0);
+  MetricParameter widthParameter(L"", 0);
   
   setUpParameters(&m_parametersStrictMock);
 
@@ -38,7 +38,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
     WillOnce(DoAll(SaveArg<0>(&widthParameter), Return(true)));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
   
   // then
   ASSERT_EQ(result, true);
@@ -57,7 +57,7 @@ TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
   ON_CALL(m_parametersNiceMock, setParameter(_)).WillByDefault(Return(false));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
 
   // then
   EXPECT_EQ(result, false);
@@ -69,7 +69,7 @@ TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
   ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(true));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
 
   // then
   EXPECT_EQ(result, false);
@@ -78,8 +78,8 @@ TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
 TEST_F(ParametersTest, shouldParameterReturnValue)
 {
   // given
-  renga_script::MetricParameter LParameter(L"", 0.0);
-  renga_script::MetricParameter WParameter(L"", 0.0);
+  MetricParameter LParameter(L"", 0.0);
+  MetricParameter WParameter(L"", 0.0);
 
   setUpParameters(&m_parametersStrictMock);
 
@@ -93,7 +93,7 @@ TEST_F(ParametersTest, shouldParameterReturnValue)
     WillOnce(DoAll(SaveArg<0>(&WParameter), Return(true)));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\WParamDefinedByLParam.rso", m_context);
+  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam.rso", m_context);
 
   // then
   ASSERT_EQ(result, true);
@@ -104,8 +104,8 @@ TEST_F(ParametersTest, shouldParameterReturnValue)
 TEST_F(ParametersTest, valueCanBeSetToParameter)
 {
   // given
-  renga_script::MetricParameter LParameter(L"", 0.0);
-  renga_script::MetricParameter WParameter(L"", 0.0);
+  MetricParameter LParameter(L"", 0.0);
+  MetricParameter WParameter(L"", 0.0);
 
   setUpParameters(&m_parametersStrictMock);
 
@@ -119,7 +119,7 @@ TEST_F(ParametersTest, valueCanBeSetToParameter)
     WillOnce(DoAll(SaveArg<0>(&WParameter), Return(true)));
 
   // when
-  bool result = renga_script::executeScript(L".\\TestData\\WParamDefinedByLParam2.rso", m_context);
+  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam2.rso", m_context);
 
   // then
   ASSERT_EQ(result, true);

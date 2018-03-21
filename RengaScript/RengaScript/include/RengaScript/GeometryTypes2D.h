@@ -1,20 +1,18 @@
 #pragma once
 
+#include <RengaScript/ApiDefines.h>
+
 #include <string>
 
 namespace renga_script
 {
-  class Point2D
+  class RENGA_SCRIPT_EXTERNAL Point2D
   {
   public:
-    Point2D(double x_, double y_)
-      : x(x_), y(y_)
-    {}
+    Point2D(double x_, double y_);
 
-    std::string type() const
-    {
-      return "Point2D";
-    }
+    std::string type() const;
+    bool operator==(const Point2D& other) const;
 
     double x = 0.0;
     double y = 0.0;
@@ -24,6 +22,6 @@ namespace renga_script
   {
   public:
     virtual ~ICurve2D() {};
-    virtual ICurve2D* copy() = 0;
+    virtual ICurve2D* copy() const = 0;
   };
 }

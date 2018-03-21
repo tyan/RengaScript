@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Geometry2DTypeWrapper.cpp" />
+    <ClCompile Include="GeometryTypes2D.cpp" />
     <ClCompile Include="LuaScriptRunner.cpp" />
     <ClCompile Include="LuaTypesRegistration.cpp" />
     <ClCompile Include="LuaScriptRuntimeContext.cpp" />

@@ -2,8 +2,8 @@
 
 #include <RengaScript/GeometryTypes2D.h>
 
-class Curve2DMock : public renga_script::ICurve2D
+class Curve2DMock : public ICurve2D
 {
 public:
-  MOCK_METHOD0(copy, ICurve2D*());
+  MOCK_CONST_METHOD0(copy, ICurve2D*());
 };

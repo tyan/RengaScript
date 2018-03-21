@@ -1,10 +1,10 @@
 #pragma once
 #include <RengaScript/IParameters.h>
 
-class ParametersMock : public renga_script::IParameters
+class ParametersMock : public IParameters
 {
 public:
-  MOCK_METHOD1(setParameter, bool(renga_script::MetricParameter&));
+  MOCK_METHOD1(setParameter, bool(MetricParameter&));
 };
 
 typedef NiceMock<ParametersMock> ParametersNice;

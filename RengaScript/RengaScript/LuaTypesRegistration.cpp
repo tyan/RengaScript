@@ -41,8 +41,8 @@ namespace lua
   void registerMetricParameterType(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
-      .beginClass <renga_script::MetricParameter>("MetricParameterClass")
-      .addProperty("value", &renga_script::MetricParameter::value, &renga_script::MetricParameter::setValue)
+      .beginClass <MetricParameter>("MetricParameterClass")
+      .addProperty("value", &MetricParameter::value, &MetricParameter::setValue)
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
@@ -52,9 +52,9 @@ namespace lua
   void registerPoint2D(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
-      .beginClass <renga_script::Point2D>("Point2D")
+      .beginClass <Point2D>("Point2D")
       .addConstructor<void(*) (double, double)>()
-      .addProperty("type", &renga_script::Point2D::type)
+      .addProperty("type", &Point2D::type)
       .endClass();
   }
 
@@ -67,10 +67,10 @@ namespace lua
     if (pGeometry2DBuilder == nullptr)
       throw L"Geometry 2D builder interface is not supported!";
 
-    return Curve2DWrapper(pGeometry2DBuilder->createRect(lbx, lby, rtx, rty));
+    return Curve2DWrapper(pGeometry2DBuilder->createRect(Point2D(lbx, lby), Point2D(rtx, rty)));
   }
 
-  Curve2DWrapper rectConstructByPoints(const renga_script::Point2D& lb, const renga_script::Point2D& rt, lua_State * pLuaState)
+  Curve2DWrapper rectConstructByPoints(const Point2D& lb, const Point2D& rt, lua_State * pLuaState)
   {
     auto pContext = ScriptRuntimeContext::getContext(pLuaState);
     assert(pContext != nullptr);
@@ -79,7 +79,7 @@ namespace lua
     if (pGeometry2DBuilder == nullptr)
       throw L"Geometry 2D builder interface is not supported!";
 
-    return Curve2DWrapper(pGeometry2DBuilder->createRect(lb.x, lb.y, rt.x, rt.y));
+    return Curve2DWrapper(pGeometry2DBuilder->createRect(lb, rt));
   }
 
   void registerRectType(lua_State * pLuaState)
