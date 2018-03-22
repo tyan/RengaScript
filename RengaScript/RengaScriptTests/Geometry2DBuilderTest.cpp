@@ -60,3 +60,35 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByPoints)
   // then
   EXPECT_TRUE(result) << m_context.error;
 }
+
+TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByPoints)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+
+  // expect
+  EXPECT_CALL(m_geometry2DStrictMock, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByPoints.rso", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}
+
+TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByCoordinates)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+
+  // expect
+  EXPECT_CALL(m_geometry2DStrictMock, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByCoord.rso", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}

@@ -19,7 +19,9 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
 
   lua::registerMetricParameterType(m_pLuaState);
   lua::registerPoint2D(m_pLuaState);
+  lua::registerCurve2DWrapper(m_pLuaState);
   lua::registerRectType(m_pLuaState);
+  lua::registerLineSegmentType(m_pLuaState);
 }
 
 ScriptRuntimeContext::~ScriptRuntimeContext()
