@@ -38,7 +38,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
     WillOnce(DoAll(SaveArg<0>(&widthParameter), Return(true)));
 
   // when
-  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.lua", m_context);
   
   // then
   ASSERT_EQ(result, true);
@@ -57,7 +57,7 @@ TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
   ON_CALL(m_parametersNiceMock, setParameter(_)).WillByDefault(Return(false));
 
   // when
-  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.lua", m_context);
 
   // then
   EXPECT_EQ(result, false);
@@ -69,7 +69,7 @@ TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
   ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(true));
 
   // when
-  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParameters.lua", m_context);
 
   // then
   EXPECT_EQ(result, false);
@@ -93,7 +93,7 @@ TEST_F(ParametersTest, shouldParameterReturnValue)
     WillOnce(DoAll(SaveArg<0>(&WParameter), Return(true)));
 
   // when
-  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam.rso", m_context);
+  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam.lua", m_context);
 
   // then
   ASSERT_EQ(result, true);
@@ -119,7 +119,7 @@ TEST_F(ParametersTest, valueCanBeSetToParameter)
     WillOnce(DoAll(SaveArg<0>(&WParameter), Return(true)));
 
   // when
-  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam2.rso", m_context);
+  bool result = executeScript(L".\\TestData\\WParamDefinedByLParam2.lua", m_context);
 
   // then
   ASSERT_EQ(result, true);

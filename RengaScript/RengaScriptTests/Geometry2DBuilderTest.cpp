@@ -39,7 +39,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByCoordinates)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Rect200x300.rso", m_context);
+  bool result = executeScript(L".\\TestData\\Rect200x300.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -55,7 +55,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Rect200x300ByPoints.rso", m_context);
+  bool result = executeScript(L".\\TestData\\Rect200x300ByPoints.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -71,7 +71,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByPoints.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByPoints.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -87,7 +87,7 @@ TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByCoordinates)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByCoord.rso", m_context);
+  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByCoord.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
