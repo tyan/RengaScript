@@ -38,7 +38,7 @@ namespace lua
     return result;
   }
 
-  void registerMetricParameterType(lua_State * pLuaState)
+  void registerParametersTypes(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
       .beginClass <MetricParameter>("MetricParameterClass")
@@ -49,7 +49,49 @@ namespace lua
       .addFunction("MetricParameter", metricParameterConstruct);
   }
 
-  void registerPoint2D(lua_State * pLuaState)
+  renga_script::IGeometry2DBuilder* getGeometry2DBuilder(lua_State * pLuaState) noexcept(false)
+  {
+    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
+    assert(pContext != nullptr);
+
+    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
+    if (pGeometry2DBuilder == nullptr)
+      throw L"Geometry 2D builder interface is not supported!";
+
+    return pGeometry2DBuilder;
+  }
+
+  Curve2DWrapper rectConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createRect(Point2D(lbx, lby), Point2D(rtx, rty)));
+  }
+
+  Curve2DWrapper rectConstructByPoints(const Point2D& lb, const Point2D& rt, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createRect(lb, rt));
+  }
+
+  Curve2DWrapper lineSegmentConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(Point2D(lbx, lby), Point2D(rtx, rty)));
+  }
+
+  Curve2DWrapper lineSegmentConstructByPoints(const Point2D& lb, const Point2D& rt, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(lb, rt));
+  }
+
+  Curve2DWrapper contourConstructByPoints(const Point2DVectorWrapper& points, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createContour(points.getVector()));
+  }
+
+  void registerGeometry2DTypes(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
       .beginClass <Point2D>("Point")
@@ -64,84 +106,15 @@ namespace lua
       .addFunction("count", &Point2DVectorWrapper::count)
       .addFunction("get", &Point2DVectorWrapper::get)
       .endClass();
-  }
 
-  void registerCurve2DWrapper(lua_State * pLuaState)
-  {
     luabridge::getGlobalNamespace(pLuaState)
       .beginClass <Curve2DWrapper>("Curve2DClass")
       .endClass();
-  }
 
-  Curve2DWrapper rectConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
-  {
-    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
-    assert(pContext != nullptr);
-
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-    if (pGeometry2DBuilder == nullptr)
-      throw L"Geometry 2D builder interface is not supported!";
-
-    return Curve2DWrapper(pGeometry2DBuilder->createRect(Point2D(lbx, lby), Point2D(rtx, rty)));
-  }
-
-  Curve2DWrapper rectConstructByPoints(const Point2D& lb, const Point2D& rt, lua_State * pLuaState)
-  {
-    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
-    assert(pContext != nullptr);
-
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-    if (pGeometry2DBuilder == nullptr)
-      throw L"Geometry 2D builder interface is not supported!";
-
-    return Curve2DWrapper(pGeometry2DBuilder->createRect(lb, rt));
-  }
-
-  void registerRectType(lua_State * pLuaState)
-  {
     luabridge::getGlobalNamespace(pLuaState)
       .addFunction("RectByCoord", rectConstructByCoord)
       .addFunction("RectByPoint", rectConstructByPoints);
-  }
 
-  Curve2DWrapper lineSegmentConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
-  {
-    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
-    assert(pContext != nullptr);
-
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-    if (pGeometry2DBuilder == nullptr)
-      throw L"Geometry 2D builder interface is not supported!";
-
-    return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(Point2D(lbx, lby), Point2D(rtx, rty)));
-  }
-
-  Curve2DWrapper lineSegmentConstructByPoints(const Point2D& lb, const Point2D& rt, lua_State * pLuaState)
-  {
-    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
-    assert(pContext != nullptr);
-
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-    if (pGeometry2DBuilder == nullptr)
-      throw L"Geometry 2D builder interface is not supported!";
-
-    return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(lb, rt));
-  }
-
-  Curve2DWrapper contourConstructByPoints(const Point2DVectorWrapper& points, lua_State * pLuaState)
-  {
-    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
-    assert(pContext != nullptr);
-
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
-    if (pGeometry2DBuilder == nullptr)
-      throw L"Geometry 2D builder interface is not supported!";
-
-    return Curve2DWrapper(pGeometry2DBuilder->createContour(points.getVector()));
-  }
-
-  void registerLineSegmentType(lua_State * pLuaState)
-  {
     luabridge::getGlobalNamespace(pLuaState)
       .addFunction("LineSegmentByCoord", lineSegmentConstructByCoord)
       .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)

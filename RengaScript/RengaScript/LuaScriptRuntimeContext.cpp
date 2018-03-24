@@ -17,11 +17,8 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
   assert(m_pLuaState != nullptr);
   m_registry.insert(std::make_pair(m_pLuaState, this));
 
-  lua::registerMetricParameterType(m_pLuaState);
-  lua::registerPoint2D(m_pLuaState);
-  lua::registerCurve2DWrapper(m_pLuaState);
-  lua::registerRectType(m_pLuaState);
-  lua::registerLineSegmentType(m_pLuaState);
+  lua::registerParametersTypes(m_pLuaState);
+  lua::registerGeometry2DTypes(m_pLuaState);
 }
 
 ScriptRuntimeContext::~ScriptRuntimeContext()
