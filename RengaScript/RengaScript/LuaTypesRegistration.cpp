@@ -56,6 +56,14 @@ namespace lua
       .addConstructor<void(*) (double, double)>()
       .addProperty("type", &Point2D::type)
       .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass<Point2DVectorWrapper>("PointArray")
+      .addConstructor<void(*) ()>()
+      .addFunction("add", &Point2DVectorWrapper::add)
+      .addFunction("count", &Point2DVectorWrapper::count)
+      .addFunction("get", &Point2DVectorWrapper::get)
+      .endClass();
   }
 
   void registerCurve2DWrapper(lua_State * pLuaState)
@@ -120,10 +128,23 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(lb, rt));
   }
 
+  Curve2DWrapper contourConstructByPoints(const Point2DVectorWrapper& points, lua_State * pLuaState)
+  {
+    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
+    assert(pContext != nullptr);
+
+    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
+    if (pGeometry2DBuilder == nullptr)
+      throw L"Geometry 2D builder interface is not supported!";
+
+    return Curve2DWrapper(pGeometry2DBuilder->createContour(points.getVector()));
+  }
+
   void registerLineSegmentType(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
       .addFunction("LineSegmentByCoord", lineSegmentConstructByCoord)
-      .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints);
+      .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)
+      .addFunction("ContourByPoints", contourConstructByPoints);
   }
 }

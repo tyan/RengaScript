@@ -92,3 +92,20 @@ TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByCoordinates)
   // then
   EXPECT_TRUE(result) << m_context.error;
 }
+
+TEST_F(Geometry2DBuilderTest, shouldCreateContourByPoints)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+
+  // expect
+  PointVector expectedPoints = { Point2D(0, 0), Point2D(300, 300), Point2D(600, 0) };
+  EXPECT_CALL(m_geometry2DStrictMock, createContour(expectedPoints)).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\ContourTriangle_0_0_300_300_600_0.lua", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}

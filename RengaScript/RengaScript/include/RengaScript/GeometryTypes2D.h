@@ -3,6 +3,7 @@
 #include <RengaScript/ApiDefines.h>
 
 #include <string>
+#include <vector>
 
 namespace renga_script
 {
@@ -17,6 +18,8 @@ namespace renga_script
     double x = 0.0;
     double y = 0.0;
   };
+
+  typedef std::vector<Point2D> PointVector;
 
   class ICurve2D
   {

@@ -3,7 +3,7 @@ local Geometry2DLib = {}
 -----------------------------------------------------------------------
 -- Rect function
 -----------------------------------------------------------------------
-local rectFuncHelp = "Rect(...) require 4 numbers or two 2D points."
+local rectFuncHelp = "Rect(...) require 4 numbers or two points."
 
 function Rect(...)
 	for key,value in pairs {...} do 
@@ -26,7 +26,7 @@ end
 -----------------------------------------------------------------------
 -- LineSegment function
 -----------------------------------------------------------------------
-local lineSegmentFuncHelp = "LineSegment(...) require 4 numbers or two 2D points."
+local lineSegmentFuncHelp = "LineSegment(...) require 4 numbers or two points."
 
 function LineSegment(...)
 	for key,value in pairs {...} do 
@@ -42,6 +42,34 @@ function LineSegment(...)
 		end
 	end
 	error("Unrecognized arguments of LineSegment(...) function. "..lineSegmentFuncHelp)
+	return nil
+end
+
+-----------------------------------------------------------------------
+-- Contour function
+-----------------------------------------------------------------------
+local contourFuncHelp = "Contour(...) require three or more points."
+
+function Contour(...)
+	if (select("#",...) < 1) then
+		error("Unrecognized arguments of Contour(...) function. "..contourFuncHelp)
+		return nil
+	end
+	
+	firstArg = select(1, ...)
+	local argtype = type(firstArg)
+	
+	if(argtype == "userdata") then
+		if (firstArg.type == "Point") then
+			points = PointArray()
+			for key,value in pairs {...} do 
+				points:add(value)
+			end
+			return ContourByPoints(points)
+		end
+	end
+		
+	error("Unrecognized arguments of Contour(...) function. "..contourFuncHelp)
 	return nil
 end
 
