@@ -52,7 +52,7 @@ namespace lua
   void registerPoint2D(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
-      .beginClass <Point2D>("Point2D")
+      .beginClass <Point2D>("Point")
       .addConstructor<void(*) (double, double)>()
       .addProperty("type", &Point2D::type)
       .endClass();

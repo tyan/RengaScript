@@ -12,7 +12,7 @@ function Rect(...)
 			assert(select("#",...) == 4, rectFuncHelp)
 			return RectByCoord(...)
 		elseif(argtype == "userdata") then
-			if (value.type == "Point2D") then
+			if (value.type == "Point") then
 				assert(select("#",...) == 2, rectFuncHelp)
 				return RectByPoint(...)
 			end
@@ -35,7 +35,7 @@ function LineSegment(...)
 			assert(select("#",...) == 4, lineSegmentFuncHelp)
 			return LineSegmentByCoord(...)
 		elseif(argtype == "userdata") then
-			if (value.type == "Point2D") then
+			if (value.type == "Point") then
 				assert(select("#",...) == 2, lineSegmentFuncHelp)
 				return LineSegmentByPoint(...)
 			end

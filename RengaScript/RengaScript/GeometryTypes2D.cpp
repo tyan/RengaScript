@@ -14,7 +14,7 @@ namespace renga_script
 
   std::string Point2D::type() const
   {
-    return "Point2D";
+    return "Point";
   }
 
   bool Point2D::operator==(const Point2D& other) const
