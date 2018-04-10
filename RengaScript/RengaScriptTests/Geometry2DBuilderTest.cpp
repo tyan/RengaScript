@@ -104,8 +104,50 @@ TEST_F(Geometry2DBuilderTest, shouldCreateContourByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\ContourTriangle_0_0_300_300_600_0.lua", m_context);
+  bool result = executeScript(L".\\TestData\\ContourByPoints_0_0_300_300_600_0.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
+}
+
+Curve2DStub* createCurveWithId(std::set<int>& createdCurveIds)
+{
+  static int curveIndex = 0;
+  createdCurveIds.insert(curveIndex++);
+  return new Curve2DStub(*createdCurveIds.crbegin());
+}
+
+void saveCurveIds(const renga_script::ConstCurveVector& curves, std::set<int>& curveIds)
+{
+  for (auto pCurve : curves)
+    curveIds.insert(static_cast<const Curve2DStub*>(pCurve)->id);
+}
+
+TEST_F(Geometry2DBuilderTest, shouldCreateContourByCurves)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DNiceMock);
+
+  std::set<int> givenCurveIds;
+  auto createCurveAction = std::bind(createCurveWithId, std::ref(givenCurveIds));
+  ON_CALL(m_geometry2DNiceMock, createLineSegment(_, _)).
+    WillByDefault(InvokeWithoutArgs(createCurveAction));
+
+  // expect
+  std::set<int> passedCurveIds;
+  auto saveCurveIdsAction = std::bind(saveCurveIds, std::placeholders::_1, std::ref(passedCurveIds));
+  EXPECT_CALL(m_geometry2DNiceMock, createContour(Matcher<const renga_script::ConstCurveVector&>(_))).
+    WillOnce(
+      DoAll(
+        WithArg<0>(Invoke(saveCurveIdsAction)),
+        Return(new Curve2DStub())
+      )
+    );
+
+  // when
+  bool result = executeScript(L".\\TestData\\ContourByCurves_0_0_300_300_600_0.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_TRUE(givenCurveIds == passedCurveIds);
 }

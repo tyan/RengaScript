@@ -10,6 +10,7 @@ namespace renga_script
   class RENGA_SCRIPT_EXTERNAL Point2D
   {
   public:
+    Point2D() = default;
     Point2D(double x_, double y_);
 
     std::string type() const;
@@ -27,4 +28,7 @@ namespace renga_script
     virtual ~ICurve2D() {};
     virtual ICurve2D* copy() const = 0;
   };
+
+  typedef std::vector<ICurve2D*> CurveVector;
+  typedef std::vector<const ICurve2D*> ConstCurveVector;
 }

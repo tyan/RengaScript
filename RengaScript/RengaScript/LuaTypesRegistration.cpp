@@ -91,6 +91,12 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createContour(points.getVector()));
   }
 
+  Curve2DWrapper contourConstructByCurves(const CurveVectorWrapper& curves, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createContour(curves.getCurves()));
+  }
+
   void registerGeometry2DTypes(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
@@ -109,6 +115,15 @@ namespace lua
 
     luabridge::getGlobalNamespace(pLuaState)
       .beginClass <Curve2DWrapper>("Curve2DClass")
+      .addProperty("type", &Curve2DWrapper::type)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass<CurveVectorWrapper>("CurveArray")
+      .addConstructor<void(*) ()>()
+      .addFunction("add", &CurveVectorWrapper::add)
+      .addFunction("count", &CurveVectorWrapper::count)
+      .addFunction("get", &CurveVectorWrapper::get)
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
@@ -118,6 +133,7 @@ namespace lua
     luabridge::getGlobalNamespace(pLuaState)
       .addFunction("LineSegmentByCoord", lineSegmentConstructByCoord)
       .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)
-      .addFunction("ContourByPoints", contourConstructByPoints);
+      .addFunction("ContourByPoints", contourConstructByPoints)
+      .addFunction("ContourByCurves", contourConstructByCurves);
   }
 }

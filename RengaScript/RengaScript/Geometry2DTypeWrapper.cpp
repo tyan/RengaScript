@@ -7,6 +7,8 @@ using namespace lua;
 ////////////////////////////////////////////////////////////////////////////
 // Curve2DWrapper
 ////////////////////////////////////////////////////////////////////////////
+const std::string Curve2DWrapper::s_type = "Curve";
+
 Curve2DWrapper::Curve2DWrapper(renga_script::ICurve2D * pCurve)
   : m_pCurve(pCurve)
 {
@@ -26,6 +28,16 @@ Curve2DWrapper::Curve2DWrapper(Curve2DWrapper && other)
 Curve2DWrapper::~Curve2DWrapper()
 {
   delete m_pCurve;
+}
+
+const std::string & Curve2DWrapper::type() const
+{
+  return s_type;
+}
+
+const renga_script::ICurve2D * lua::Curve2DWrapper::curve() const
+{
+  return m_pCurve;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -63,4 +75,42 @@ size_t Point2DVectorWrapper::count() const
 const renga_script::PointVector& Point2DVectorWrapper::getVector() const
 {
   return m_vector;
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+// Curve2DVectorWrapper
+////////////////////////////////////////////////////////////////////////////
+CurveVectorWrapper::CurveVectorWrapper()
+{}
+
+CurveVectorWrapper::CurveVectorWrapper(const CurveVectorWrapper & other)
+  : m_curves(other.m_curves)
+{}
+
+CurveVectorWrapper::CurveVectorWrapper(CurveVectorWrapper && other)
+  : m_curves(std::move(other.m_curves))
+{}
+
+void CurveVectorWrapper::add(const Curve2DWrapper & curve)
+{
+  m_curves.push_back(curve);
+}
+
+const Curve2DWrapper & CurveVectorWrapper::get(size_t index) const
+{
+  return m_curves.at(index);
+}
+
+size_t lua::CurveVectorWrapper::count() const
+{
+  return m_curves.size();
+}
+
+renga_script::ConstCurveVector CurveVectorWrapper::getCurves() const
+{
+  renga_script::ConstCurveVector result;
+  for (auto& curve : m_curves)
+    result.push_back(curve.curve());
+  return result;
 }

@@ -3,7 +3,7 @@ local Geometry2DLib = {}
 -----------------------------------------------------------------------
 -- Rect function
 -----------------------------------------------------------------------
-local rectFuncHelp = "Rect(...) require 4 numbers or two points."
+local rectFuncHelp = "Rect(...) requires 4 numbers or two points."
 
 function Rect(...)
 	for key,value in pairs {...} do 
@@ -26,7 +26,7 @@ end
 -----------------------------------------------------------------------
 -- LineSegment function
 -----------------------------------------------------------------------
-local lineSegmentFuncHelp = "LineSegment(...) require 4 numbers or two points."
+local lineSegmentFuncHelp = "LineSegment(...) requires 4 numbers or two points."
 
 function LineSegment(...)
 	for key,value in pairs {...} do 
@@ -48,7 +48,7 @@ end
 -----------------------------------------------------------------------
 -- Contour function
 -----------------------------------------------------------------------
-local contourFuncHelp = "Contour(...) require three or more points."
+local contourFuncHelp = "Contour(...) requires three or more points or one or more curves."
 
 function Contour(...)
 	if (select("#",...) < 1) then
@@ -66,6 +66,12 @@ function Contour(...)
 				points:add(value)
 			end
 			return ContourByPoints(points)
+		elseif (firstArg.type == "Curve") then
+			curves = CurveArray()
+			for key,value in pairs {...} do 
+				curves:add(value)
+			end
+			return ContourByCurves(curves)
 		end
 	end
 		
