@@ -1,1 +1,0 @@
-XCOPY *.lua ..\..\x64\Debug\LibraryScript /s /i /y
