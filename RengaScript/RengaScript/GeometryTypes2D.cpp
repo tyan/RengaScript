@@ -12,11 +12,6 @@ namespace renga_script
     : x(x_), y(y_)
   {}
 
-  std::string Point2D::type() const
-  {
-    return "Point";
-  }
-
   bool Point2D::operator==(const Point2D& other) const
   {
     if (fabs(other.x - x) < sc_metricPrecise)

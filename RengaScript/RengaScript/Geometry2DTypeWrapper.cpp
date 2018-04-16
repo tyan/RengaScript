@@ -4,6 +4,21 @@
 
 using namespace lua;
 
+
+////////////////////////////////////////////////////////////////////////////
+// Point2DWrapper
+////////////////////////////////////////////////////////////////////////////
+const std::string Point2DWrapper::s_type = "Point";
+
+Point2DWrapper::Point2DWrapper(double x, double y)
+  : m_point(x, y)
+{}
+
+const std::string& Point2DWrapper::type() const
+{
+  return s_type;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // Curve2DWrapper
 ////////////////////////////////////////////////////////////////////////////
@@ -35,7 +50,7 @@ const std::string & Curve2DWrapper::type() const
   return s_type;
 }
 
-const renga_script::ICurve2D * lua::Curve2DWrapper::curve() const
+const renga_script::ICurve2D * Curve2DWrapper::curve() const
 {
   return m_pCurve;
 }
@@ -57,14 +72,15 @@ Point2DVectorWrapper::Point2DVectorWrapper(Point2DVectorWrapper && other)
 Point2DVectorWrapper::~Point2DVectorWrapper()
 {}
 
-void Point2DVectorWrapper::add(renga_script::Point2D point)
+void Point2DVectorWrapper::add(const Point2DWrapper& pointWrapper)
 {
-  m_vector.push_back(point);
+  m_vector.push_back(pointWrapper.m_point);
 }
 
-const renga_script::Point2D & Point2DVectorWrapper::get(size_t index) const
+Point2DWrapper Point2DVectorWrapper::get(size_t index) const
 {
-  return m_vector.at(index);
+  const renga_script::Point2D& point = m_vector.at(index);
+  return Point2DWrapper(point.x, point.y);
 }
 
 size_t Point2DVectorWrapper::count() const
@@ -102,7 +118,7 @@ const Curve2DWrapper & CurveVectorWrapper::get(size_t index) const
   return m_curves.at(index);
 }
 
-size_t lua::CurveVectorWrapper::count() const
+size_t CurveVectorWrapper::count() const
 {
   return m_curves.size();
 }

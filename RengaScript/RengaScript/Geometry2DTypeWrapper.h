@@ -4,6 +4,26 @@
 
 namespace lua
 {
+  class Point2DWrapper
+  {
+  public:
+    Point2DWrapper() = default;
+    Point2DWrapper(const Point2DWrapper& other) = default;
+    Point2DWrapper(Point2DWrapper&& other) = default;
+    ~Point2DWrapper() = default;
+
+    Point2DWrapper(double x, double y);
+    const std::string& type() const;
+
+  public:
+    // TODO: extract interface or friend accessor
+    // internal access
+    renga_script::Point2D m_point;
+
+  public:
+    static const std::string s_type;
+  };
+
   class Curve2DWrapper
   {
   public:
@@ -49,8 +69,8 @@ namespace lua
     Point2DVectorWrapper(Point2DVectorWrapper&& other);
     ~Point2DVectorWrapper();
 
-    void add(renga_script::Point2D point);
-    const renga_script::Point2D& get(size_t index) const;
+    void add(const Point2DWrapper& point);
+    Point2DWrapper get(size_t index) const;
     size_t count() const;
 
     // TODO: extract interface or friend accessor

@@ -13,7 +13,6 @@ namespace renga_script
     Point2D() = default;
     Point2D(double x_, double y_);
 
-    std::string type() const;
     bool operator==(const Point2D& other) const;
 
     double x = 0.0;
