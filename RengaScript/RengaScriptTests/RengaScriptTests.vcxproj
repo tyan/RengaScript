@@ -65,7 +65,8 @@
       <AdditionalDependencies>RengaScript.lib;gtestd.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>XCOPY ..\RengaScript\LibraryScript\*.lua $(OutDir)\LibraryScript /s /i /y</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -88,7 +89,8 @@
       <AdditionalLibraryDirectories>..\..\googletest-release-1.8.0\gtest\lib\x64\Release;..\..\googletest-release-1.8.0\gmock\lib\x64\Release;%(AdditionalLibraryDirectories);$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>XCOPY ..\RengaScript\LibraryScript\*.lua $(OutDir)\LibraryScript /s /i /y</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
