@@ -50,6 +50,11 @@ const std::string & Curve2DWrapper::type() const
   return s_type;
 }
 
+Curve2DWrapper Curve2DWrapper::operator+(const Curve2DWrapper & other) const
+{
+  return Curve2DWrapper(m_pCurve->getUnionWith(other.m_pCurve));
+}
+
 const renga_script::ICurve2D * Curve2DWrapper::curve() const
 {
   return m_pCurve;

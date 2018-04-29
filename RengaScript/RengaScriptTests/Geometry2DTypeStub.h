@@ -20,6 +20,13 @@ public:
     return new Curve2DStub(id);
   }
 
+  ICurve2D* getUnionWith(const ICurve2D* pOther) const override
+  {
+    auto pOtherStub = dynamic_cast<const Curve2DStub*>(pOther);
+    assert(pOther);
+    return new Curve2DStub(id + pOtherStub->id);
+  }
+
 public:
   int id = 0;
 };

@@ -151,3 +151,24 @@ TEST_F(Geometry2DBuilderTest, shouldCreateContourByCurves)
   ASSERT_TRUE(result) << m_context.error;
   EXPECT_TRUE(givenCurveIds == passedCurveIds);
 }
+
+TEST_F(Geometry2DBuilderTest, shouldCallCurvesAddition)
+{
+  // given
+  setUpGeometry2DBuilder(&m_geometry2DNiceMock);
+  int counter = 0;
+  int resultId = 0;
+
+  ON_CALL(m_geometry2DNiceMock, createRect(_, _)).
+    WillByDefault(InvokeWithoutArgs([&]() { return new Curve2DStub(++counter); }));
+  EXPECT_CALL(m_geometry2DNiceMock, dump(_)).
+    WillOnce(WithArg<0>(Invoke([&](const ICurve2D* pCurve) { resultId = ((const Curve2DStub*)pCurve)->id; })));
+
+  // when
+  bool result = executeScript(L".\\TestData\\AddCurves.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_EQ(counter, 2); // 1, 2
+  EXPECT_EQ(resultId, 3); // 1 + 2
+}

@@ -59,4 +59,5 @@ void lua::ScriptRunner::loadLibraryFiles()
 {
   std::wstring libraryScriptDir = getDllDir() + L"\\LibraryScript";
   executeScript(libraryScriptDir + L"\\Geometry2DLib.lua");
+  executeScript(libraryScriptDir + L"\\Dump.lua");
 }

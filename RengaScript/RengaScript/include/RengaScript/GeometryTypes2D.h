@@ -26,6 +26,7 @@ namespace renga_script
   public:
     virtual ~ICurve2D() {};
     virtual ICurve2D* copy() const = 0;
+    virtual ICurve2D* getUnionWith(const ICurve2D* pOther) const = 0;
   };
 
   typedef std::vector<ICurve2D*> CurveVector;

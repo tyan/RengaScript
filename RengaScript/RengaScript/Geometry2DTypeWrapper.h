@@ -32,6 +32,7 @@ namespace lua
     Curve2DWrapper(Curve2DWrapper&& other);
     ~Curve2DWrapper();
     const std::string& type() const;
+    Curve2DWrapper operator+(const Curve2DWrapper& other) const;
     
     // TODO: extract interface or friend accessor
     // internal access
