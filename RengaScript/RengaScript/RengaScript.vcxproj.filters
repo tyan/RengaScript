@@ -56,10 +56,10 @@
     <ClCompile Include="Path.cpp">
       <Filter>Source\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry2DTypeWrapper.cpp">
+    <ClCompile Include="GeometryTypeWrapper.cpp">
       <Filter>Source\Lua\TypeWrapper</Filter>
     </ClCompile>
-    <ClCompile Include="GeometryTypes2D.cpp">
+    <ClCompile Include="GeometryTypes.cpp">
       <Filter>Source\API</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,9 +68,6 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RengaScript\GeometryTypes2D.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\RengaScript\Parameter.h">
@@ -91,9 +88,6 @@
     <ClInclude Include="include\RengaScript\ExecuteScript.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\RengaScript\IGeometry2DBuilder.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="include\RengaScript\IParameters.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -103,15 +97,21 @@
     <ClInclude Include="dllmain.h">
       <Filter>Source\Module</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry2DTypeWrapper.h">
+    <ClInclude Include="include\RengaScript\IGeometryBuilder.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RengaScript\GeometryTypes.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryTypeWrapper.h">
       <Filter>Source\Lua\TypeWrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LibraryScript\Geometry2DLib.lua">
+    <None Include="LibraryScript\Dump.lua">
       <Filter>Source\Lua\LuaLibrary</Filter>
     </None>
-    <None Include="LibraryScript\Dump.lua">
+    <None Include="LibraryScript\GeometryLib.lua">
       <Filter>Source\Lua\LuaLibrary</Filter>
     </None>
   </ItemGroup>

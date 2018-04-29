@@ -6,8 +6,7 @@
 namespace renga_script
 {
   class IParameters;
-  class IGeometry2DBuilder;
-  class IGeometry3DBuilder;
+  class IGeometryBuilder;
   class IObject3DDefinition;
 }
 
@@ -17,8 +16,7 @@ namespace renga_script
   {
   public:
     IParameters* pParameters = nullptr;
-    IGeometry2DBuilder* pGeometryBuilder2D = nullptr;
-    IGeometry3DBuilder* pGeometryBuilder3D = nullptr;
+    IGeometryBuilder* pGeometryBuilder = nullptr;
     IObject3DDefinition* pObject3DDefinition = nullptr;
     std::wstring error;
   };

@@ -3,15 +3,15 @@
 #include <RengaScript/ExecuteScript.h>
 
 #include "ParametersMock.h"
-#include "Geometry2DBuilderMock.h"
-#include "Geometry2DTypeStub.h"
+#include "GeometryBuilderMock.h"
+#include "GeometryTypeStub.h"
 
-class Geometry2DBuilderTest : public Test
+class GeometryBuilderTest : public Test
 {
 public:
-  void setUpGeometry2DBuilder(IGeometry2DBuilder* pService)
+  void setUpGeometryBuilder(IGeometryBuilder* pService)
   {
-    m_context.pGeometryBuilder2D = pService;
+    m_context.pGeometryBuilder = pService;
   }
 
   void setUpParameters(IParameters* pService)
@@ -22,17 +22,17 @@ public:
 protected:
   Object3DConstructionContext m_context;
   
-  Geometry2DBuilderStrict m_geometry2DStrictMock;
-  Geometry2DBuilderNice m_geometry2DNiceMock;
+  GeometryBuilderStrict m_geometry2DStrictMock;
+  GeometryBuilderNice m_geometry2DNiceMock;
 
   ParametersStrict m_parametersStrictMock;
   ParametersNice m_parametersNiceMock;
 };
 
-TEST_F(Geometry2DBuilderTest, shouldCreateRectByCoordinates)
+TEST_F(GeometryBuilderTest, shouldCreateRectByCoordinates)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
 
   // expect
   EXPECT_CALL(m_geometry2DStrictMock, createRect(Point2D(0, 0), Point2D(200, 300))).
@@ -45,10 +45,10 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByCoordinates)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCreateRectByPoints)
+TEST_F(GeometryBuilderTest, shouldCreateRectByPoints)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
 
   // expect
   EXPECT_CALL(m_geometry2DStrictMock, createRect(Point2D(0, 0), Point2D(200, 300))).
@@ -61,10 +61,10 @@ TEST_F(Geometry2DBuilderTest, shouldCreateRectByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByPoints)
+TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByPoints)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
 
   // expect
   EXPECT_CALL(m_geometry2DStrictMock, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
@@ -77,10 +77,10 @@ TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByCoordinates)
+TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
 
   // expect
   EXPECT_CALL(m_geometry2DStrictMock, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
@@ -93,10 +93,10 @@ TEST_F(Geometry2DBuilderTest, shouldCreateLineSegmentByCoordinates)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCreateContourByPoints)
+TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DStrictMock);
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
 
   // expect
   PointVector expectedPoints = { Point2D(0, 0), Point2D(300, 300), Point2D(600, 0) };
@@ -123,10 +123,10 @@ void saveCurveIds(const renga_script::ConstCurveVector& curves, std::set<int>& c
     curveIds.insert(static_cast<const Curve2DStub*>(pCurve)->id);
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCreateContourByCurves)
+TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DNiceMock);
+  setUpGeometryBuilder(&m_geometry2DNiceMock);
 
   std::set<int> givenCurveIds;
   auto createCurveAction = std::bind(createCurveWithId, std::ref(givenCurveIds));
@@ -152,10 +152,10 @@ TEST_F(Geometry2DBuilderTest, shouldCreateContourByCurves)
   EXPECT_TRUE(givenCurveIds == passedCurveIds);
 }
 
-TEST_F(Geometry2DBuilderTest, shouldCallCurvesAddition)
+TEST_F(GeometryBuilderTest, shouldCallCurvesAddition)
 {
   // given
-  setUpGeometry2DBuilder(&m_geometry2DNiceMock);
+  setUpGeometryBuilder(&m_geometry2DNiceMock);
   int counter = 0;
   int resultId = 0;
 

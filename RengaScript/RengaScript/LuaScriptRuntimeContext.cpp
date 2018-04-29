@@ -18,7 +18,7 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
   m_registry.insert(std::make_pair(m_pLuaState, this));
 
   lua::registerParametersTypes(m_pLuaState);
-  lua::registerGeometry2DTypes(m_pLuaState);
+  lua::registerGeometryTypes(m_pLuaState);
 }
 
 ScriptRuntimeContext::~ScriptRuntimeContext()
@@ -31,9 +31,9 @@ IParameters * ScriptRuntimeContext::getParameters() const
   return m_object3DContext.pParameters;
 }
 
-IGeometry2DBuilder * ScriptRuntimeContext::getGeometry2DBuilder() const
+IGeometryBuilder * ScriptRuntimeContext::getGeometryBuilder() const
 {
-  return m_object3DContext.pGeometryBuilder2D;
+  return m_object3DContext.pGeometryBuilder;
 }
 
 ScriptRuntimeContext * ScriptRuntimeContext::getContext(lua_State * pLuaState)

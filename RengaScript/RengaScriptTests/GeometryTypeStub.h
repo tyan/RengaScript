@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RengaScript/GeometryTypes2D.h>
+#include <RengaScript/GeometryTypes.h>
 
 class Curve2DStub : public ICurve2D
 {

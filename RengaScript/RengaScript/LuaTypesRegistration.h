@@ -8,5 +8,5 @@ namespace lua
 {
   void registerParametersTypes(lua_State* pLuaState);
   
-  void registerGeometry2DTypes(lua_State * pLuaState);
+  void registerGeometryTypes(lua_State * pLuaState);
 }

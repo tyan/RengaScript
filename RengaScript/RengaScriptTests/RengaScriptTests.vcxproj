@@ -94,14 +94,14 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Geometry2DBuilderMock.h" />
-    <ClInclude Include="Geometry2DTypeMock.h" />
-    <ClInclude Include="Geometry2DTypeStub.h" />
+    <ClInclude Include="GeometryBuilderMock.h" />
+    <ClInclude Include="GeometryTypeMock.h" />
+    <ClInclude Include="GeometryTypeStub.h" />
     <ClInclude Include="ParametersMock.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Geometry2DBuilderTest.cpp" />
+    <ClCompile Include="GeometryBuilderTest.cpp" />
     <ClCompile Include="ParametersTest.cpp" />
     <ClCompile Include="RengaScriptTests.cpp" />
     <ClCompile Include="stdafx.cpp">

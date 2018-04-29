@@ -1,4 +1,4 @@
-#include <RengaScript/GeometryTypes2D.h>
+#include <RengaScript/GeometryTypes.h>
 
 namespace renga_script
 {

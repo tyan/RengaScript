@@ -1,7 +1,7 @@
 #pragma once
-#include <RengaScript/IGeometry2DBuilder.h>
+#include <RengaScript/IGeometryBuilder.h>
 
-class Geometry2DBuilderMock : public IGeometry2DBuilder
+class GeometryBuilderMock : public IGeometryBuilder
 {
 public:
   MOCK_CONST_METHOD2(createRect, ICurve2D*(const Point2D& lb, const Point2D& rt));
@@ -11,5 +11,5 @@ public:
   MOCK_CONST_METHOD1(dump, void(const ICurve2D* pCurve));
 };
 
-typedef NiceMock<Geometry2DBuilderMock> Geometry2DBuilderNice;
-typedef StrictMock<Geometry2DBuilderMock> Geometry2DBuilderStrict;
+typedef NiceMock<GeometryBuilderMock> GeometryBuilderNice;
+typedef StrictMock<GeometryBuilderMock> GeometryBuilderStrict;

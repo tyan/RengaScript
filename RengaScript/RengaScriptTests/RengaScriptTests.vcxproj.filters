@@ -26,7 +26,7 @@
     <ClCompile Include="ParametersTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry2DBuilderTest.cpp">
+    <ClCompile Include="GeometryBuilderTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,16 +34,16 @@
     <ClInclude Include="stdafx.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry2DTypeMock.h">
-      <Filter>Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry2DBuilderMock.h">
-      <Filter>Mocks</Filter>
-    </ClInclude>
     <ClInclude Include="ParametersMock.h">
       <Filter>Mocks</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry2DTypeStub.h">
+    <ClInclude Include="GeometryBuilderMock.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryTypeMock.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryTypeStub.h">
       <Filter>Stubs</Filter>
     </ClInclude>
   </ItemGroup>

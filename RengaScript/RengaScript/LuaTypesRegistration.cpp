@@ -1,10 +1,10 @@
 #include "LuaTypesRegistration.h"
 #include "LuaScriptRuntimeContext.h"
 #include "StringConvertion.h"
-#include "Geometry2DTypeWrapper.h"
+#include "GeometryTypeWrapper.h"
 
 #include <RengaScript/IParameters.h>
-#include <RengaScript/IGeometry2DBuilder.h>
+#include <RengaScript/IGeometryBuilder.h>
 
 #include <assert.h>
 
@@ -49,12 +49,12 @@ namespace lua
       .addFunction("MetricParameter", metricParameterConstruct);
   }
 
-  renga_script::IGeometry2DBuilder* getGeometry2DBuilder(lua_State * pLuaState) noexcept(false)
+  renga_script::IGeometryBuilder* getGeometryBuilder(lua_State * pLuaState) noexcept(false)
   {
     auto pContext = ScriptRuntimeContext::getContext(pLuaState);
     assert(pContext != nullptr);
 
-    auto pGeometry2DBuilder = pContext->getGeometry2DBuilder();
+    auto pGeometry2DBuilder = pContext->getGeometryBuilder();
     if (pGeometry2DBuilder == nullptr)
       throw L"Geometry 2D builder interface is not supported!";
 
@@ -63,47 +63,47 @@ namespace lua
 
   Curve2DWrapper rectConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createRect(Point2D(lbx, lby), Point2D(rtx, rty)));
   }
 
   Curve2DWrapper rectConstructByPoints(const Point2DWrapper& lb, const Point2DWrapper& rt, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createRect(lb.m_point, rt.m_point));
   }
 
   Curve2DWrapper lineSegmentConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(Point2D(lbx, lby), Point2D(rtx, rty)));
   }
 
   Curve2DWrapper lineSegmentConstructByPoints(const Point2DWrapper& lb, const Point2DWrapper& rt, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(lb.m_point, rt.m_point));
   }
 
   Curve2DWrapper contourConstructByPoints(const Point2DVectorWrapper& points, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createContour(points.getVector()));
   }
 
   Curve2DWrapper contourConstructByCurves(const CurveVectorWrapper& curves, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return Curve2DWrapper(pGeometry2DBuilder->createContour(curves.getCurves()));
   }
 
   void dumpCurve(const Curve2DWrapper& curve, lua_State * pLuaState)
   {
-    auto pGeometry2DBuilder = getGeometry2DBuilder(pLuaState);
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     pGeometry2DBuilder->dump(curve.curve());
   }
 
-  void registerGeometry2DTypes(lua_State * pLuaState)
+  void registerGeometryTypes(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
       .beginClass <Point2DWrapper>("Point")

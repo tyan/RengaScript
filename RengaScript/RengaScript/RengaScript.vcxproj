@@ -94,9 +94,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h" />
-    <ClInclude Include="Geometry2DTypeWrapper.h" />
-    <ClInclude Include="include\RengaScript\GeometryTypes2D.h" />
-    <ClInclude Include="include\RengaScript\IGeometry2DBuilder.h" />
+    <ClInclude Include="GeometryTypeWrapper.h" />
+    <ClInclude Include="include\RengaScript\GeometryTypes.h" />
+    <ClInclude Include="include\RengaScript\IGeometryBuilder.h" />
     <ClInclude Include="include\RengaScript\IObject3DDefinition.h" />
     <ClInclude Include="include\RengaScript\IParameters.h" />
     <ClInclude Include="LuaScriptRunner.h" />
@@ -109,8 +109,8 @@
     <ClInclude Include="StringConvertion.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Geometry2DTypeWrapper.cpp" />
-    <ClCompile Include="GeometryTypes2D.cpp" />
+    <ClCompile Include="GeometryTypeWrapper.cpp" />
+    <ClCompile Include="GeometryTypes.cpp" />
     <ClCompile Include="LuaScriptRunner.cpp" />
     <ClCompile Include="LuaTypesRegistration.cpp" />
     <ClCompile Include="LuaScriptRuntimeContext.cpp" />
@@ -133,7 +133,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="LibraryScript\Geometry2DLib.lua">
+    <None Include="LibraryScript\GeometryLib.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DeploymentContent>true</DeploymentContent>
     </None>

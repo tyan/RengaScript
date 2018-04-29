@@ -1,4 +1,4 @@
-local Geometry2DLib = {}
+local GeometryLib = {}
 
 -----------------------------------------------------------------------
 -- Rect function
@@ -79,4 +79,4 @@ function Contour(...)
 	return nil
 end
 
-return Geometry2DLib
+return GeometryLib

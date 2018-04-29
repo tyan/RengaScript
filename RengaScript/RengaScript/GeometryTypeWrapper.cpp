@@ -1,4 +1,4 @@
-#include "Geometry2DTypeWrapper.h"
+#include "GeometryTypeWrapper.h"
 
 #include <utility>
 

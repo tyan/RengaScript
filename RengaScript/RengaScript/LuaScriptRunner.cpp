@@ -58,6 +58,6 @@ void ScriptRunner::executeScript(const std::wstring & path)
 void lua::ScriptRunner::loadLibraryFiles()
 {
   std::wstring libraryScriptDir = getDllDir() + L"\\LibraryScript";
-  executeScript(libraryScriptDir + L"\\Geometry2DLib.lua");
+  executeScript(libraryScriptDir + L"\\GeometryLib.lua");
   executeScript(libraryScriptDir + L"\\Dump.lua");
 }
