@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GeometryBuilderMock.h" />
+    <ClInclude Include="GeometryTypeMatcher.h" />
     <ClInclude Include="GeometryTypeMock.h" />
     <ClInclude Include="GeometryTypeStub.h" />
     <ClInclude Include="ParametersMock.h" />

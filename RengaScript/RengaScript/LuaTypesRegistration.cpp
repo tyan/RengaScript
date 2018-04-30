@@ -97,6 +97,12 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createContour(curves.getCurves()));
   }
 
+  SolidWrapper createExtrusionSolid(const Curve2DWrapper& base, double from, double to, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return SolidWrapper(pGeometry2DBuilder->createExtrusion(base.curve(), from, to));
+  }
+
   void dumpCurve(const Curve2DWrapper& curve, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
@@ -134,12 +140,19 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <SolidWrapper>("SolidClass")
+      .addProperty("type", &SolidWrapper::type)
+      .addFunction("__add", &SolidWrapper::operator+)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
       .addFunction("RectByCoord", rectConstructByCoord)
       .addFunction("RectByPoint", rectConstructByPoints)
       .addFunction("LineSegmentByCoord", lineSegmentConstructByCoord)
       .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)
       .addFunction("ContourByPoints", contourConstructByPoints)
       .addFunction("ContourByCurves", contourConstructByCurves)
+      .addFunction("Extrusion", createExtrusionSolid)
       .addFunction("DumpCurve", dumpCurve);
   }
 }

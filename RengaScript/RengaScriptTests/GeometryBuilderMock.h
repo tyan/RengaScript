@@ -8,6 +8,7 @@ public:
   MOCK_CONST_METHOD2(createLineSegment, ICurve2D* (const Point2D& p1, const Point2D& p2));
   MOCK_CONST_METHOD1(createContour, ICurve2D* (const PointVector& points));
   MOCK_CONST_METHOD1(createContour, ICurve2D* (const ConstCurveVector& curves));
+  MOCK_CONST_METHOD3(createExtrusion, ISolid* (const ICurve2D* pBase, double from, double to));
   MOCK_CONST_METHOD1(dump, void(const ICurve2D* pCurve));
 };
 

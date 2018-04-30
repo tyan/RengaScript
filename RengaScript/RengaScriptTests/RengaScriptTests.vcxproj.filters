@@ -15,6 +15,9 @@
     <Filter Include="Stubs">
       <UniqueIdentifier>{6373b84b-96bd-42bc-a32e-44c5c23e1bdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Matchers">
+      <UniqueIdentifier>{3848b8ad-fea6-46ac-8dec-795231f243fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -45,6 +48,9 @@
     </ClInclude>
     <ClInclude Include="GeometryTypeStub.h">
       <Filter>Stubs</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryTypeMatcher.h">
+      <Filter>Matchers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

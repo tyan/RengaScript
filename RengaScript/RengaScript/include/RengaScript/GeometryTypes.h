@@ -31,4 +31,13 @@ namespace renga_script
 
   typedef std::vector<ICurve2D*> CurveVector;
   typedef std::vector<const ICurve2D*> ConstCurveVector;
+
+  class ISolid
+  {
+  public:
+    virtual ~ISolid() {}
+    virtual ISolid* copy() const = 0;
+    virtual ISolid* getUnionWith(const ISolid* pOther) const = 0;
+    virtual ISolid* getDifferenceWith(const ISolid* pOther) const = 0;
+  };
 }

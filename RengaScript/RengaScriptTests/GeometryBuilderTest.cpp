@@ -5,6 +5,7 @@
 #include "ParametersMock.h"
 #include "GeometryBuilderMock.h"
 #include "GeometryTypeStub.h"
+#include "GeometryTypeMatcher.h"
 
 class GeometryBuilderTest : public Test
 {
@@ -171,4 +172,24 @@ TEST_F(GeometryBuilderTest, shouldCallCurvesAddition)
   ASSERT_TRUE(result) << m_context.error;
   EXPECT_EQ(counter, 2); // 1, 2
   EXPECT_EQ(resultId, 3); // 1 + 2
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
+{
+  // given
+  setUpGeometryBuilder(&m_geometry2DNiceMock);
+
+  int curveId = 42;
+  ON_CALL(m_geometry2DNiceMock, createContour(Matcher<const renga_script::PointVector&>(_))).
+    WillByDefault(Return(new Curve2DStub(curveId)));
+
+  // expect
+  EXPECT_CALL(m_geometry2DNiceMock, createExtrusion(CurveIdEq(curveId), -100, 100)).
+    WillOnce(Return(new SolidStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\Extrusion_m100_100.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
 }

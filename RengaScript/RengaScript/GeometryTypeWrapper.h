@@ -81,4 +81,23 @@ namespace lua
   private:
     renga_script::PointVector m_vector;
   };
+
+  class SolidWrapper
+  {
+  public:
+    SolidWrapper(renga_script::ISolid* pSolid);
+    SolidWrapper(const SolidWrapper& other);
+    SolidWrapper(SolidWrapper&& other);
+    ~SolidWrapper();
+    const std::string& type() const;
+    SolidWrapper operator+(const SolidWrapper& other) const;
+
+    // TODO: extract interface or friend accessor
+    // internal access
+    const renga_script::ISolid* solid() const;
+
+  private:
+    renga_script::ISolid* m_pSolid;
+    static const std::string s_type;
+  };
 }

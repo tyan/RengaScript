@@ -135,3 +135,45 @@ renga_script::ConstCurveVector CurveVectorWrapper::getCurves() const
     result.push_back(curve.curve());
   return result;
 }
+
+
+////////////////////////////////////////////////////////////////////////////
+// Curve2DWrapper
+////////////////////////////////////////////////////////////////////////////
+const std::string SolidWrapper::s_type = "Solid";
+
+SolidWrapper::SolidWrapper(renga_script::ISolid * pSolid)
+  : m_pSolid(pSolid)
+{
+}
+
+SolidWrapper::SolidWrapper(const SolidWrapper & other)
+  : m_pSolid((other.m_pSolid) ? other.m_pSolid->copy() : nullptr)
+{
+}
+
+SolidWrapper::SolidWrapper(SolidWrapper && other)
+  : m_pSolid(std::move(other.m_pSolid))
+{
+  other.m_pSolid = nullptr;
+}
+
+SolidWrapper::~SolidWrapper()
+{
+  delete m_pSolid;
+}
+
+const std::string & SolidWrapper::type() const
+{
+  return s_type;
+}
+
+SolidWrapper SolidWrapper::operator+(const SolidWrapper & other) const
+{
+  return SolidWrapper(m_pSolid->getUnionWith(other.m_pSolid));
+}
+
+const renga_script::ISolid * SolidWrapper::solid() const
+{
+  return m_pSolid;
+}

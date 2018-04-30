@@ -30,3 +30,39 @@ public:
 public:
   int id = 0;
 };
+
+class SolidStub : public ISolid
+{
+public:
+  SolidStub()
+  {}
+
+  SolidStub(int id_)
+    : id(id_)
+  {}
+
+  SolidStub(const SolidStub&) = default;
+  SolidStub(SolidStub&&) = default;
+
+  ISolid* copy() const override
+  {
+    return new SolidStub(id);
+  }
+
+  ISolid* getUnionWith(const ISolid* pOther) const override
+  {
+    auto pOtherStub = dynamic_cast<const SolidStub*>(pOther);
+    assert(pOther);
+    return new SolidStub(id + pOtherStub->id);
+  }
+
+  ISolid* getDifferenceWith(const ISolid* pOther) const
+  {
+    auto pOtherStub = dynamic_cast<const SolidStub*>(pOther);
+    assert(pOther);
+    return new SolidStub(id - pOtherStub->id);
+  }
+
+public:
+  int id = 0;
+};
