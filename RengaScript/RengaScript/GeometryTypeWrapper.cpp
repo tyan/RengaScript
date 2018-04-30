@@ -20,6 +20,20 @@ const std::string& Point2DWrapper::type() const
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// Point3DWrapper
+////////////////////////////////////////////////////////////////////////////
+const std::string Point3DWrapper::s_type = "Point3D";
+
+Point3DWrapper::Point3DWrapper(double x, double y, double z)
+  : m_point(x, y, z)
+{}
+
+const std::string& Point3DWrapper::type() const
+{
+  return s_type;
+}
+
+////////////////////////////////////////////////////////////////////////////
 // Curve2DWrapper
 ////////////////////////////////////////////////////////////////////////////
 const std::string Curve2DWrapper::s_type = "Curve";
@@ -136,6 +150,42 @@ renga_script::ConstCurveVector CurveVectorWrapper::getCurves() const
   return result;
 }
 
+
+////////////////////////////////////////////////////////////////////////////
+// Curve2DWrapper
+////////////////////////////////////////////////////////////////////////////
+const std::string LCSWrapper::s_type = "LCS";
+
+LCSWrapper::LCSWrapper(renga_script::ILCS * pLCS)
+  : m_pLCS(pLCS)
+{
+}
+
+LCSWrapper::LCSWrapper(const LCSWrapper & other)
+  : m_pLCS((other.m_pLCS) ? other.m_pLCS->copy() : nullptr)
+{
+}
+
+LCSWrapper::LCSWrapper(LCSWrapper && other)
+  : m_pLCS(std::move(other.m_pLCS))
+{
+  other.m_pLCS = nullptr;
+}
+
+LCSWrapper::~LCSWrapper()
+{
+  delete m_pLCS;
+}
+
+const std::string & LCSWrapper::type() const
+{
+  return s_type;
+}
+
+const renga_script::ILCS * LCSWrapper::lcs() const
+{
+  return m_pLCS;
+}
 
 ////////////////////////////////////////////////////////////////////////////
 // Curve2DWrapper

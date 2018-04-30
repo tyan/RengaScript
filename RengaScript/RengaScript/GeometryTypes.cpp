@@ -19,4 +19,22 @@ namespace renga_script
     else
       return false;
   }
+
+
+  ////////////////////////////////////////////////////////
+  // Point3D
+  ////////////////////////////////////////////////////////
+
+  Point3D::Point3D(double x_, double y_, double z_)
+    : x(x_), y(y_), z(z_)
+  {}
+
+  bool Point3D::operator==(const Point3D & other) const
+  {
+    if (fabs(other.x - x) < sc_metricPrecise)
+      if (fabs(other.y - y) < sc_metricPrecise)
+        return fabs(other.z - z) < sc_metricPrecise;
+    
+    return false;
+  }
 }

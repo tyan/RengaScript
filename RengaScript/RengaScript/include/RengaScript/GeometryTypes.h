@@ -40,4 +40,24 @@ namespace renga_script
     virtual ISolid* getUnionWith(const ISolid* pOther) const = 0;
     virtual ISolid* getDifferenceWith(const ISolid* pOther) const = 0;
   };
+
+  class RENGA_SCRIPT_EXTERNAL Point3D
+  {
+  public:
+    Point3D() = default;
+    Point3D(double x_, double y_, double z_);
+
+    bool operator==(const Point3D& other) const;
+
+    double x = 0.0;
+    double y = 0.0;
+    double z = 0.0;
+  };
+
+  class ILCS
+  {
+  public:
+    virtual ~ILCS() {}
+    virtual ILCS* copy() const = 0;
+  };
 }

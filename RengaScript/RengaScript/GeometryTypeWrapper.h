@@ -20,7 +20,27 @@ namespace lua
     // internal access
     renga_script::Point2D m_point;
 
+  private:
+    static const std::string s_type;
+  };
+
+  class Point3DWrapper
+  {
   public:
+    Point3DWrapper() = default;
+    Point3DWrapper(const Point3DWrapper& other) = default;
+    Point3DWrapper(Point3DWrapper&& other) = default;
+    ~Point3DWrapper() = default;
+
+    Point3DWrapper(double x, double y, double z);
+    const std::string& type() const;
+
+  public:
+    // TODO: extract interface or friend accessor
+    // internal access
+    renga_script::Point3D m_point;
+
+  private:
     static const std::string s_type;
   };
 
@@ -57,7 +77,6 @@ namespace lua
     // internal access
     renga_script::ConstCurveVector getCurves() const;
 
-
   private:
     std::vector<Curve2DWrapper> m_curves;
   };
@@ -80,6 +99,24 @@ namespace lua
 
   private:
     renga_script::PointVector m_vector;
+  };
+
+  class LCSWrapper
+  {
+  public:
+    LCSWrapper(renga_script::ILCS* pCurve);
+    LCSWrapper(const LCSWrapper& other);
+    LCSWrapper(LCSWrapper&& other);
+    ~LCSWrapper();
+    const std::string& type() const;
+
+    // TODO: extract interface or friend accessor
+    // internal access
+    const renga_script::ILCS* lcs() const;
+
+  private:
+    renga_script::ILCS* m_pLCS;
+    static const std::string s_type;
   };
 
   class SolidWrapper
