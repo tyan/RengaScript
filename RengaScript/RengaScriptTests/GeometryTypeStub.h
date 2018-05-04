@@ -66,3 +66,18 @@ public:
 public:
   int id = 0;
 };
+
+class LCSStub : public ILCS
+{
+public:
+  LCSStub()
+  {}
+
+  LCSStub(const LCSStub&) = default;
+  LCSStub(LCSStub&&) = default;
+
+  ILCS* copy() const override
+  {
+    return new LCSStub();
+  }
+};

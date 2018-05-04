@@ -124,6 +124,17 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <Point3DWrapper>("Point3D")
+      .addConstructor<void(*) (double, double, double)>()
+      .addProperty("type", &Point3DWrapper::type)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <LCSWrapper>("LCSClass")
+      .addProperty("type", &LCSWrapper::type)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
       .beginClass<Point2DVectorWrapper>("PointArray")
       .addConstructor<void(*) ()>()
       .addFunction("add", &Point2DVectorWrapper::add)

@@ -193,3 +193,20 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
   // then
   ASSERT_TRUE(result) << m_context.error;
 }
+
+TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
+{
+  // given
+  setUpGeometryBuilder(&m_geometry2DStrictMock);
+  renga_script::Point3D origin(0.0, 0.0, 0.0), xAxis(0.0, 1.0, 0.0), yAxis(1.0, 0.0, 0.0);
+
+  // expect
+  EXPECT_CALL(m_geometry2DStrictMock, createLCS(origin, xAxis, yAxis)).
+    WillOnce(Return(new LCSStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\LCSBy3Points.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+}
