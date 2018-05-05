@@ -1,0 +1,1 @@
+lcs = LCS(Point3D(100, 0, 0))

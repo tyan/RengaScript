@@ -103,10 +103,16 @@ namespace lua
     return SolidWrapper(pGeometry2DBuilder->createExtrusion(base.curve(), from, to));
   }
 
-  LCSWrapper createLCS(const Point3DWrapper& origin, const Point3DWrapper& xAxis, const Point3DWrapper& yAxis, lua_State * pLuaState)
+  LCSWrapper createLCSBy3Points(const Point3DWrapper& origin, const Point3DWrapper& xAxis, const Point3DWrapper& yAxis, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return LCSWrapper(pGeometry2DBuilder->createLCS(origin.m_point, xAxis.m_point, yAxis.m_point));
+  }
+
+  LCSWrapper createLCSByPoint(const Point3DWrapper& origin, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return LCSWrapper(pGeometry2DBuilder->createLCS(origin.m_point));
   }
 
   void dumpCurve(const Curve2DWrapper& curve, lua_State * pLuaState)
@@ -170,7 +176,8 @@ namespace lua
       .addFunction("ContourByPoints", contourConstructByPoints)
       .addFunction("ContourByCurves", contourConstructByCurves)
       .addFunction("Extrusion", createExtrusionSolid)
-      .addFunction("LCS", createLCS)
+      .addFunction("LCSBy3Points", createLCSBy3Points)
+      .addFunction("LCSByPoint", createLCSByPoint)
       .addFunction("DumpCurve", dumpCurve);
   }
 }
