@@ -97,6 +97,12 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createContour(curves.getCurves()));
   }
 
+  SolidWrapper createCuboid(const Point3DWrapper& p1, const Point3DWrapper& p2, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return SolidWrapper(pGeometry2DBuilder->createCuboid(p1.m_point, p2.m_point));
+  }
+
   SolidWrapper createExtrusionSolid(const Curve2DWrapper& base, double from, double to, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
@@ -175,6 +181,7 @@ namespace lua
       .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)
       .addFunction("ContourByPoints", contourConstructByPoints)
       .addFunction("ContourByCurves", contourConstructByCurves)
+      .addFunction("Cuboid", createCuboid)
       .addFunction("Extrusion", createExtrusionSolid)
       .addFunction("LCSBy3Points", createLCSBy3Points)
       .addFunction("LCSByPoint", createLCSByPoint)
