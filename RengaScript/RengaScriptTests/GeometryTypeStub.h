@@ -73,11 +73,18 @@ public:
   LCSStub()
   {}
 
+  LCSStub(int id_)
+    : id(id_)
+  {}
+
   LCSStub(const LCSStub&) = default;
   LCSStub(LCSStub&&) = default;
 
   ILCS* copy() const override
   {
-    return new LCSStub();
+    return new LCSStub(id);
   }
+
+public:
+  int id = 0;
 };

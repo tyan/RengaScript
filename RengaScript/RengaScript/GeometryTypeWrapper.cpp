@@ -227,3 +227,8 @@ const renga_script::ISolid * SolidWrapper::solid() const
 {
   return m_pSolid;
 }
+
+renga_script::ISolid * SolidWrapper::solid()
+{
+  return m_pSolid;
+}

@@ -201,7 +201,7 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
     WillByDefault(Return(new Curve2DStub(curveId)));
 
   // expect
-  EXPECT_CALL(m_geometryBuilderNice, createExtrusion(CurveIdEq(curveId), -100, 100)).
+  EXPECT_CALL(m_geometryBuilderNice, createExtrusion(CurveIdEqConst(curveId), -100, 100)).
     WillOnce(Return(new SolidStub()));
 
   // when
@@ -240,6 +240,27 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
 
   // when
   bool result = executeScript(L".\\TestData\\LCSBy3Points.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+}
+
+TEST_F(GeometryBuilderTest, shouldMoveBodyToLCS)
+{
+  // given
+  setUpGeometryBuilder(&m_geometryBuilderNice);
+  int bodyId = 42, lcsId = 142;
+
+  ON_CALL(m_geometryBuilderNice, createCuboid(_, _)).
+    WillByDefault(Return(new SolidStub(bodyId)));
+  ON_CALL(m_geometryBuilderNice, createLCS(_)).
+    WillByDefault(Return(new LCSStub(lcsId)));
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderNice, move(SolidIdEq(bodyId), LCSIdEqConst(lcsId)));
+
+  // when
+  bool result = executeScript(L".\\TestData\\MoveBodyToLCS.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;

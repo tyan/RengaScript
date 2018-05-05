@@ -121,6 +121,12 @@ namespace lua
     return LCSWrapper(pGeometry2DBuilder->createLCS(origin.m_point));
   }
 
+  void moveSolidToLCS(SolidWrapper& solid, const LCSWrapper& lcs, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    pGeometry2DBuilder->move(solid.solid(), lcs.lcs());
+  }
+
   void dumpCurve(const Curve2DWrapper& curve, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
@@ -185,6 +191,7 @@ namespace lua
       .addFunction("Extrusion", createExtrusionSolid)
       .addFunction("LCSBy3Points", createLCSBy3Points)
       .addFunction("LCSByPoint", createLCSByPoint)
+      .addFunction("Move", moveSolidToLCS)
       .addFunction("DumpCurve", dumpCurve);
   }
 }

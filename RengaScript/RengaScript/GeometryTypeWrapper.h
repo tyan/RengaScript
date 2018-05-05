@@ -132,6 +132,7 @@ namespace lua
     // TODO: extract interface or friend accessor
     // internal access
     const renga_script::ISolid* solid() const;
+    renga_script::ISolid* solid();
 
   private:
     renga_script::ISolid* m_pSolid;
