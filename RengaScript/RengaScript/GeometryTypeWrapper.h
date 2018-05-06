@@ -127,7 +127,8 @@ namespace lua
     SolidWrapper(SolidWrapper&& other);
     ~SolidWrapper();
     const std::string& type() const;
-    SolidWrapper operator+(const SolidWrapper& other) const;
+    SolidWrapper operator + (const SolidWrapper& other) const;
+    SolidWrapper operator & (const SolidWrapper& other) const;
 
     // TODO: extract interface or friend accessor
     // internal access

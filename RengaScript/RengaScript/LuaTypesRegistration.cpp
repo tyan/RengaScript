@@ -133,6 +133,12 @@ namespace lua
     pGeometry2DBuilder->dump(curve.curve());
   }
 
+  void dumpSolid(const SolidWrapper& solid, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    pGeometry2DBuilder->dump(solid.solid());
+  }
+
   void registerGeometryTypes(lua_State * pLuaState)
   {
     luabridge::getGlobalNamespace(pLuaState)
@@ -178,6 +184,7 @@ namespace lua
       .beginClass <SolidWrapper>("SolidClass")
       .addProperty("type", &SolidWrapper::type)
       .addFunction("__add", &SolidWrapper::operator+)
+      .addFunction("__band", &SolidWrapper::operator&)
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
@@ -192,6 +199,7 @@ namespace lua
       .addFunction("LCSBy3Points", createLCSBy3Points)
       .addFunction("LCSByPoint", createLCSByPoint)
       .addFunction("Move", moveSolidToLCS)
-      .addFunction("DumpCurve", dumpCurve);
+      .addFunction("DumpCurve", dumpCurve)
+      .addFunction("DumpSolid", dumpSolid);
   }
 }

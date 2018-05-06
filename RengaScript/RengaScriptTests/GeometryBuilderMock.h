@@ -14,6 +14,7 @@ public:
   MOCK_CONST_METHOD3(createExtrusion, ISolid* (const ICurve2D* pBase, double from, double to));
   MOCK_CONST_METHOD2(move, void(ISolid* pSolid, const ILCS* pLcs));
   MOCK_CONST_METHOD1(dump, void(const ICurve2D* pCurve));
+  MOCK_CONST_METHOD1(dump, void(const ISolid* pSolid));
 };
 
 typedef NiceMock<GeometryBuilderMock> GeometryBuilderNice;

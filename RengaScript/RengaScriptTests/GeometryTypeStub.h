@@ -49,6 +49,13 @@ public:
     return new SolidStub(id);
   }
 
+  ISolid* getMultisolidWith(const ISolid* pOther) const override
+  {
+    auto pOtherStub = dynamic_cast<const SolidStub*>(pOther);
+    assert(pOther);
+    return new SolidStub(10 * (id + pOtherStub->id)); // just to separate from getUnionWith
+  }
+
   ISolid* getUnionWith(const ISolid* pOther) const override
   {
     auto pOtherStub = dynamic_cast<const SolidStub*>(pOther);

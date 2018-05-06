@@ -16,5 +16,6 @@ namespace renga_script
     virtual ISolid* createExtrusion(const ICurve2D* pBase, double from, double to) const = 0;
     virtual void move(ISolid* pSolid, const ILCS* pLcs) const = 0;
     virtual void dump(const ICurve2D* pCurve) const = 0;
+    virtual void dump(const ISolid* pSolid) const = 0;
   };
 }

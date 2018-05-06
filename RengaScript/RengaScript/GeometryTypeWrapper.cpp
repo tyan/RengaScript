@@ -223,6 +223,11 @@ SolidWrapper SolidWrapper::operator+(const SolidWrapper & other) const
   return SolidWrapper(m_pSolid->getUnionWith(other.m_pSolid));
 }
 
+SolidWrapper SolidWrapper::operator&(const SolidWrapper & other) const
+{
+  return SolidWrapper(m_pSolid->getMultisolidWith(other.m_pSolid));
+}
+
 const renga_script::ISolid * SolidWrapper::solid() const
 {
   return m_pSolid;

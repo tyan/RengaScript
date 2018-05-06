@@ -153,7 +153,7 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
   EXPECT_TRUE(givenCurveIds == passedCurveIds);
 }
 
-TEST_F(GeometryBuilderTest, shouldCallCurvesAddition)
+TEST_F(GeometryBuilderTest, shouldCreateCurvesUnion)
 {
   // given
   setUpGeometryBuilder(&m_geometryBuilderNice);
@@ -162,11 +162,11 @@ TEST_F(GeometryBuilderTest, shouldCallCurvesAddition)
 
   ON_CALL(m_geometryBuilderNice, createRect(_, _)).
     WillByDefault(InvokeWithoutArgs([&]() { return new Curve2DStub(++counter); }));
-  EXPECT_CALL(m_geometryBuilderNice, dump(_)).
+  EXPECT_CALL(m_geometryBuilderNice, dump(Matcher<const ICurve2D*>(_))).
     WillOnce(WithArg<0>(Invoke([&](const ICurve2D* pCurve) { resultId = ((const Curve2DStub*)pCurve)->id; })));
 
   // when
-  bool result = executeScript(L".\\TestData\\AddCurves.lua", m_context);
+  bool result = executeScript(L".\\TestData\\CurvesUnion.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -245,13 +245,13 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldMoveBodyToLCS)
+TEST_F(GeometryBuilderTest, shouldMoveSolidToLCS)
 {
   // given
   setUpGeometryBuilder(&m_geometryBuilderNice);
   int bodyId = 42, lcsId = 142;
 
-  ON_CALL(m_geometryBuilderNice, createCuboid(_, _)).
+  ON_CALL(m_geometryBuilderNice, createCuboid(Point3D(0, 0, 0), Point3D(100, 100, 100))).
     WillByDefault(Return(new SolidStub(bodyId)));
   ON_CALL(m_geometryBuilderNice, createLCS(_)).
     WillByDefault(Return(new LCSStub(lcsId)));
@@ -264,4 +264,46 @@ TEST_F(GeometryBuilderTest, shouldMoveBodyToLCS)
 
   // then
   ASSERT_TRUE(result) << m_context.error;
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateMultiSolid)
+{
+  // given
+  setUpGeometryBuilder(&m_geometryBuilderNice);
+  int counter = 0;
+  int resultId = 0;
+
+  ON_CALL(m_geometryBuilderNice, createCuboid(_, _)).
+    WillByDefault(InvokeWithoutArgs([&]() { return new SolidStub(++counter); }));
+  EXPECT_CALL(m_geometryBuilderNice, dump(Matcher<const ISolid*>(_))).
+    WillOnce(WithArg<0>(Invoke([&](const ISolid* pSolid) { resultId = ((const SolidStub*)pSolid)->id; })));
+
+  // when
+  bool result = executeScript(L".\\TestData\\SolidsCombining.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_EQ(counter, 2); // 1, 2
+  EXPECT_EQ(resultId, 30); // (1 + 2) * 10
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateSolidsUnion)
+{
+  // given
+  setUpGeometryBuilder(&m_geometryBuilderNice);
+  int counter = 0;
+  int resultId = 0;
+
+  ON_CALL(m_geometryBuilderNice, createCuboid(_, _)).
+    WillByDefault(InvokeWithoutArgs([&]() { return new SolidStub(++counter); }));
+  EXPECT_CALL(m_geometryBuilderNice, dump(Matcher<const ISolid*>(_))).
+    WillOnce(WithArg<0>(Invoke([&](const ISolid* pSolid) { resultId = ((const SolidStub*)pSolid)->id; })));
+
+  // when
+  bool result = executeScript(L".\\TestData\\SolidsUnion.lua", m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_EQ(counter, 2); // 1, 2
+  EXPECT_EQ(resultId, 3); // 1 + 2
 }

@@ -37,6 +37,7 @@ namespace renga_script
   public:
     virtual ~ISolid() {}
     virtual ISolid* copy() const = 0;
+    virtual ISolid* getMultisolidWith(const ISolid* pOther) const = 0;
     virtual ISolid* getUnionWith(const ISolid* pOther) const = 0;
     virtual ISolid* getDifferenceWith(const ISolid* pOther) const = 0;
   };
