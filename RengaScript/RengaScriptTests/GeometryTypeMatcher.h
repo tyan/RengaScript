@@ -22,14 +22,18 @@ private:
   const int m_expectedId;
 };
 
-inline Matcher<const ICurve2D*> CurveIdEqConst(int expectedCurveId) {
-  return MakeMatcher(new StubIdEqMatcher<const ICurve2D, Curve2DStub>(expectedCurveId));
+inline Matcher<const ICurve2D*> CurveIdEqConst(int expectedId) {
+  return MakeMatcher(new StubIdEqMatcher<const ICurve2D, Curve2DStub>(expectedId));
 }
 
-inline Matcher<ISolid*> SolidIdEq(int expectedCurveId) {
-  return MakeMatcher(new StubIdEqMatcher<ISolid, SolidStub>(expectedCurveId));
+inline Matcher<ISolid*> SolidIdEq(int expectedId) {
+  return MakeMatcher(new StubIdEqMatcher<ISolid, SolidStub>(expectedId));
 }
 
-inline Matcher<const ILCS*> LCSIdEqConst(int expectedCurveId) {
-  return MakeMatcher(new StubIdEqMatcher<const ILCS, LCSStub>(expectedCurveId));
+inline Matcher<const ISolid*> SolidIdEqConst(int expectedId) {
+  return MakeMatcher(new StubIdEqMatcher<const ISolid, SolidStub>(expectedId));
+}
+
+inline Matcher<const ILCS*> LCSIdEqConst(int expectedId) {
+  return MakeMatcher(new StubIdEqMatcher<const ILCS, LCSStub>(expectedId));
 }

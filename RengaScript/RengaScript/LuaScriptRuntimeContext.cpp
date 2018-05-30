@@ -19,6 +19,7 @@ ScriptRuntimeContext::ScriptRuntimeContext(lua_State* pLuaState, const Object3DC
 
   lua::registerParametersTypes(m_pLuaState);
   lua::registerGeometryTypes(m_pLuaState);
+  lua::registerObject3DTypes(m_pLuaState);
 }
 
 ScriptRuntimeContext::~ScriptRuntimeContext()
@@ -34,6 +35,11 @@ IParameters * ScriptRuntimeContext::getParameters() const
 IGeometryBuilder * ScriptRuntimeContext::getGeometryBuilder() const
 {
   return m_object3DContext.pGeometryBuilder;
+}
+
+renga_script::IObject3DDefinition * ScriptRuntimeContext::getObject3DDefinition() const
+{
+  return m_object3DContext.pObject3DDefinition;
 }
 
 ScriptRuntimeContext * ScriptRuntimeContext::getContext(lua_State * pLuaState)

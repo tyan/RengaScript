@@ -1,0 +1,2 @@
+cube = Cuboid(Point3D(0, 0, 0), Point3D(100, 100, 100))
+SetObject3DRepresentation(cube)

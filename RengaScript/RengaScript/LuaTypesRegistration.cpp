@@ -5,6 +5,7 @@
 
 #include <RengaScript/IParameters.h>
 #include <RengaScript/IGeometryBuilder.h>
+#include <RengaScript/IObject3DDefinition.h>
 
 #include <assert.h>
 
@@ -59,6 +60,18 @@ namespace lua
       throw L"Geometry 2D builder interface is not supported!";
 
     return pGeometry2DBuilder;
+  }
+
+  renga_script::IObject3DDefinition* getObject3DDefinition(lua_State * pLuaState) noexcept(false)
+  {
+    auto pContext = ScriptRuntimeContext::getContext(pLuaState);
+    assert(pContext != nullptr);
+
+    auto pObject3DDefinition = pContext->getObject3DDefinition();
+    if (pObject3DDefinition == nullptr)
+      throw L"Object3D definition interface is not supported!";
+
+    return pObject3DDefinition;
   }
 
   Curve2DWrapper rectConstructByCoord(double lbx, double lby, double rtx, double rty, lua_State * pLuaState)
@@ -201,5 +214,17 @@ namespace lua
       .addFunction("Move", moveSolidToLCS)
       .addFunction("DumpCurve", dumpCurve)
       .addFunction("DumpSolid", dumpSolid);
+  }
+
+  void setObject3DRepresentation(const SolidWrapper& solid, lua_State * pLuaState)
+  {
+    auto pObject3DDefinition = getObject3DDefinition(pLuaState);
+    pObject3DDefinition->setSolidRepresentation(solid.solid());
+  }
+
+  void registerObject3DTypes(lua_State * pLuaState)
+  {
+    luabridge::getGlobalNamespace(pLuaState)
+      .addFunction("SetObject3DRepresentation", setObject3DRepresentation);
   }
 }

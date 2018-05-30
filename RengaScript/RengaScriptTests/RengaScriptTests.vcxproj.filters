@@ -32,6 +32,9 @@
     <ClCompile Include="GeometryBuilderTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Object3DDefinitionTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -51,6 +54,9 @@
     </ClInclude>
     <ClInclude Include="GeometryTypeMatcher.h">
       <Filter>Matchers</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3DDefinitionMock.h">
+      <Filter>Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

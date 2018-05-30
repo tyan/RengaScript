@@ -1,10 +1,11 @@
 #pragma once
+#include <RengaScript/GeometryTypes.h>
 
 namespace renga_script
 {
   class IObject3DDefinition
   {
   public:
-    virtual void set3DGeometry() = 0;
+    virtual void setSolidRepresentation(const ISolid* pSolid) = 0;
   };
 }
