@@ -7,9 +7,9 @@
 class ParametersTest : public Test
 {
 public:
-  void setUpParameters(IParameters* pService)
+  void setupContext(IParameters* pParameters)
   {
-    m_context.pParameters = pService;
+    m_context.pParameters = pParameters;
   }
 
 protected:
@@ -26,7 +26,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
   MetricParameter lengthParameter(L"", 0);
   MetricParameter widthParameter(L"", 0);
   
-  setUpParameters(&m_parametersStrictMock);
+  setupContext(&m_parametersStrictMock);
 
   // expect
   Sequence s;
@@ -53,7 +53,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
 TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
 {
   // given
-  setUpParameters(&m_parametersNiceMock);
+  setupContext(&m_parametersNiceMock);
   ON_CALL(m_parametersNiceMock, setParameter(_)).WillByDefault(Return(false));
 
   // when
@@ -81,7 +81,7 @@ TEST_F(ParametersTest, shouldParameterReturnValue)
   MetricParameter LParameter(L"", 0.0);
   MetricParameter WParameter(L"", 0.0);
 
-  setUpParameters(&m_parametersStrictMock);
+  setupContext(&m_parametersStrictMock);
 
   // expect
   Sequence s;
@@ -107,7 +107,7 @@ TEST_F(ParametersTest, valueCanBeSetToParameter)
   MetricParameter LParameter(L"", 0.0);
   MetricParameter WParameter(L"", 0.0);
 
-  setUpParameters(&m_parametersStrictMock);
+  setupContext(&m_parametersStrictMock);
 
   // expect
   Sequence s;

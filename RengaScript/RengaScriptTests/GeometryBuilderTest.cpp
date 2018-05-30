@@ -10,14 +10,9 @@
 class GeometryBuilderTest : public Test
 {
 public:
-  void setUpGeometryBuilder(IGeometryBuilder* pService)
+  void setUpContext(IGeometryBuilder* pGeometryBuilder)
   {
-    m_context.pGeometryBuilder = pService;
-  }
-
-  void setUpParameters(IParameters* pService)
-  {
-    m_context.pParameters = pService;
+    m_context.pGeometryBuilder = pGeometryBuilder;
   }
 
 protected:
@@ -25,15 +20,12 @@ protected:
   
   GeometryBuilderStrict m_geometryBuilderStrict;
   GeometryBuilderNice m_geometryBuilderNice;
-
-  ParametersStrict m_parametersStrict;
-  ParametersNice m_parametersNice;
 };
 
 TEST_F(GeometryBuilderTest, shouldCreateRectByCoordinates)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
 
   // expect
   EXPECT_CALL(m_geometryBuilderStrict, createRect(Point2D(0, 0), Point2D(200, 300))).
@@ -49,7 +41,7 @@ TEST_F(GeometryBuilderTest, shouldCreateRectByCoordinates)
 TEST_F(GeometryBuilderTest, shouldCreateRectByPoints)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
 
   // expect
   EXPECT_CALL(m_geometryBuilderStrict, createRect(Point2D(0, 0), Point2D(200, 300))).
@@ -65,7 +57,7 @@ TEST_F(GeometryBuilderTest, shouldCreateRectByPoints)
 TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByPoints)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
 
   // expect
   EXPECT_CALL(m_geometryBuilderStrict, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
@@ -81,7 +73,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByPoints)
 TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
 
   // expect
   EXPECT_CALL(m_geometryBuilderStrict, createLineSegment(Point2D(0, 0), Point2D(200, 300))).
@@ -97,7 +89,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
 TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
 
   // expect
   PointVector expectedPoints = { Point2D(0, 0), Point2D(300, 300), Point2D(600, 0) };
@@ -127,7 +119,7 @@ void saveCurveIds(const renga_script::ConstCurveVector& curves, std::set<int>& c
 TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
 
   std::set<int> givenCurveIds;
   auto createCurveAction = std::bind(createCurveWithId, std::ref(givenCurveIds));
@@ -156,7 +148,7 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
 TEST_F(GeometryBuilderTest, shouldCreateCurvesUnion)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
   int counter = 0;
   int resultId = 0;
 
@@ -177,7 +169,7 @@ TEST_F(GeometryBuilderTest, shouldCreateCurvesUnion)
 TEST_F(GeometryBuilderTest, shouldCreateCuboid)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
   renga_script::Point3D p1(-100, -100, 0), p2(100, 100, 100);
 
   // expect
@@ -194,7 +186,7 @@ TEST_F(GeometryBuilderTest, shouldCreateCuboid)
 TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
 
   int curveId = 42;
   ON_CALL(m_geometryBuilderNice, createContour(Matcher<const renga_script::PointVector&>(_))).
@@ -214,7 +206,7 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
 TEST_F(GeometryBuilderTest, shouldCreateLCSByOnePoint)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
   renga_script::Point3D origin(100.0, 0.0, 0.0);
 
   // expect
@@ -231,7 +223,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByOnePoint)
 TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderStrict);
+  setUpContext(&m_geometryBuilderStrict);
   renga_script::Point3D origin(0.0, 0.0, 0.0), xAxis(0.0, 1.0, 0.0), yAxis(1.0, 0.0, 0.0);
 
   // expect
@@ -248,7 +240,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
 TEST_F(GeometryBuilderTest, shouldMoveSolidToLCS)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
   int bodyId = 42, lcsId = 142;
 
   ON_CALL(m_geometryBuilderNice, createCuboid(Point3D(0, 0, 0), Point3D(100, 100, 100))).
@@ -269,7 +261,7 @@ TEST_F(GeometryBuilderTest, shouldMoveSolidToLCS)
 TEST_F(GeometryBuilderTest, shouldCreateMultiSolid)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
   int counter = 0;
   int resultId = 0;
 
@@ -290,7 +282,7 @@ TEST_F(GeometryBuilderTest, shouldCreateMultiSolid)
 TEST_F(GeometryBuilderTest, shouldCreateSolidsUnion)
 {
   // given
-  setUpGeometryBuilder(&m_geometryBuilderNice);
+  setUpContext(&m_geometryBuilderNice);
   int counter = 0;
   int resultId = 0;
 
