@@ -92,7 +92,7 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
   setUpContext(&m_geometryBuilderStrict);
 
   // expect
-  PointVector expectedPoints = { Point2D(0, 0), Point2D(300, 300), Point2D(600, 0) };
+  Point2DVector expectedPoints = { Point2D(0, 0), Point2D(300, 300), Point2D(600, 0) };
   EXPECT_CALL(m_geometryBuilderStrict, createContour(expectedPoints)).
     WillOnce(Return(new Curve2DStub()));
 
@@ -189,7 +189,7 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
   setUpContext(&m_geometryBuilderNice);
 
   int curveId = 42;
-  ON_CALL(m_geometryBuilderNice, createContour(Matcher<const renga_script::PointVector&>(_))).
+  ON_CALL(m_geometryBuilderNice, createContour(Matcher<const renga_script::Point2DVector&>(_))).
     WillByDefault(Return(new Curve2DStub(curveId)));
 
   // expect

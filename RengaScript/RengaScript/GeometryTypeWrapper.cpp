@@ -107,7 +107,7 @@ size_t Point2DVectorWrapper::count() const
   return m_vector.size();
 }
 
-const renga_script::PointVector& Point2DVectorWrapper::getVector() const
+const renga_script::Point2DVector& Point2DVectorWrapper::getVector() const
 {
   return m_vector;
 }

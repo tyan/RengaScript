@@ -95,10 +95,10 @@ namespace lua
 
     // TODO: extract interface or friend accessor
     // internal access
-    const renga_script::PointVector& getVector() const;
+    const renga_script::Point2DVector& getVector() const;
 
   private:
-    renga_script::PointVector m_vector;
+    renga_script::Point2DVector m_vector;
   };
 
   class LCSWrapper
