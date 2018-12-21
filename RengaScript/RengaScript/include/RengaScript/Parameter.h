@@ -3,6 +3,9 @@
 #include <RengaScript/ApiDefines.h>
 #include <string>
 
+#pragma warning( push )
+#pragma warning( disable : 4251 )
+
 namespace renga_script
 {
   // AbstractParameter
@@ -36,3 +39,5 @@ namespace renga_script
     double m_value;
   };
 }
+
+#pragma warning (pop)
