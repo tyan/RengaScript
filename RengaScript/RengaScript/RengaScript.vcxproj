@@ -131,11 +131,19 @@
     <ClCompile Include="StringConvertion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LibraryScript\CommonTypeCheck.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="LibraryScript\Dump.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="LibraryScript\GeometryLib.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="LibraryScript\ParameterLib.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DeploymentContent>true</DeploymentContent>
     </None>

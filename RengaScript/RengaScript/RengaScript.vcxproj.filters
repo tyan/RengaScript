@@ -114,5 +114,11 @@
     <None Include="LibraryScript\GeometryLib.lua">
       <Filter>Source\Lua\LuaLibrary</Filter>
     </None>
+    <None Include="LibraryScript\CommonTypeCheck.lua">
+      <Filter>Source\Lua\LuaLibrary</Filter>
+    </None>
+    <None Include="LibraryScript\ParameterLib.lua">
+      <Filter>Source\Lua\LuaLibrary</Filter>
+    </None>
   </ItemGroup>
 </Project>

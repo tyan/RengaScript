@@ -18,11 +18,15 @@ using namespace renga_script;
 
 namespace lua
 {
-
-  MetricParameter metricParameterConstruct(char const* name, double defaultValue, lua_State * pLuaState)
+  MetricParameter ñreateMetricParameter(
+    char const* name, 
+    double defaultValue, 
+    char const* categories,
+    lua_State * pLuaState)
   {
     std::wstring paramName = convertString(name);
     double paramValue = defaultValue;
+    std::wstring paramCategories = convertString(categories);
 
     auto pContext = ScriptRuntimeContext::getContext(pLuaState);
     assert(pContext != nullptr);
@@ -31,7 +35,7 @@ namespace lua
     if (pParameters == nullptr)
       throw L"Parameters interface is not supported!";
 
-    MetricParameter result(paramName, paramValue);
+    MetricParameter result(paramName, paramValue, paramCategories);
     bool parameterWasSet = pParameters->setParameter(result);
     if (parameterWasSet == false)
       throw std::wstring(L"Failed to set parameter: ") + paramName;
@@ -47,7 +51,7 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
-      .addFunction("MetricParameter", metricParameterConstruct);
+      .addFunction("CreateMetricParameter", ñreateMetricParameter);
   }
 
   renga_script::IGeometryBuilder* getGeometryBuilder(lua_State * pLuaState) noexcept(false)

@@ -3,8 +3,9 @@
 namespace renga_script
 {
   // AbstractParameter
-  AbstractParameter::AbstractParameter(const std::wstring & name)
+  AbstractParameter::AbstractParameter(const std::wstring & name, const std::wstring& category)
     : m_name(name)
+    , m_category(category)
   {}
 
   AbstractParameter::AbstractParameter(const AbstractParameter & other)
@@ -18,11 +19,16 @@ namespace renga_script
   const std::wstring & AbstractParameter::name() const
   {
     return m_name;
-  }  
+  }
+
+  const std::wstring & AbstractParameter::category() const
+  {
+    return m_category;
+  }
 
   // MetricParameter
-  MetricParameter::MetricParameter(const std::wstring & name, double defaultValue)
-    : AbstractParameter(name)
+  MetricParameter::MetricParameter(const std::wstring & name, double defaultValue, const std::wstring& category)
+    : AbstractParameter(name, category)
     , m_value(defaultValue)
   {}
 

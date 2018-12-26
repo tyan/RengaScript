@@ -50,6 +50,38 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
   EXPECT_DOUBLE_EQ(widthParameter.value(), 300.0);
 }
 
+TEST_F(ParametersTest, shouldReadMetricParametersWithCategory)
+{
+  // given
+  MetricParameter lengthParameter(L"", 0, L"");
+  MetricParameter widthParameter(L"", 0, L"");
+
+  setupContext(&m_parametersStrictMock);
+
+  // expect
+  Sequence s;
+  EXPECT_CALL(m_parametersStrictMock, setParameter(_)).
+    InSequence(s).
+    WillOnce(DoAll(SaveArg<0>(&lengthParameter), Return(true)));
+  EXPECT_CALL(m_parametersStrictMock, setParameter(_)).
+    InSequence(s).
+    WillOnce(DoAll(SaveArg<0>(&widthParameter), Return(true)));
+
+  // when
+  bool result = executeScript(L".\\TestData\\LengthAndWidthParametersWithCategory.lua", m_context);
+
+  // then
+  ASSERT_EQ(result, true);
+
+  EXPECT_EQ(lengthParameter.name(), L"Length");
+  EXPECT_DOUBLE_EQ(lengthParameter.value(), 400.0);
+  EXPECT_EQ(lengthParameter.category(), L"Category1");
+
+  EXPECT_EQ(widthParameter.name(), L"Width");
+  EXPECT_DOUBLE_EQ(widthParameter.value(), 300.0);
+  EXPECT_EQ(widthParameter.category(), L"Category2");
+}
+
 TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
 {
   // given
