@@ -18,7 +18,7 @@ using namespace renga_script;
 
 namespace lua
 {
-  MetricParameter ñreateMetricParameter(
+  MetricParameter createMetricParameter(
     char const* name, 
     double defaultValue, 
     char const* categories,
@@ -51,7 +51,7 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
-      .addFunction("CreateMetricParameter", ñreateMetricParameter);
+      .addFunction("CreateMetricParameter", createMetricParameter);
   }
 
   renga_script::IGeometryBuilder* getGeometryBuilder(lua_State * pLuaState) noexcept(false)
