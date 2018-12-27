@@ -26,6 +26,10 @@ inline Matcher<const ICurve2D*> CurveIdEqConst(int expectedId) {
   return MakeMatcher(new StubIdEqMatcher<const ICurve2D, Curve2DStub>(expectedId));
 }
 
+inline Matcher<const ICurve3D*> Curve3DIdEqConst(int expectedId) {
+  return MakeMatcher(new StubIdEqMatcher<const ICurve3D, Curve3DStub>(expectedId));
+}
+
 inline Matcher<ISolid*> SolidIdEq(int expectedId) {
   return MakeMatcher(new StubIdEqMatcher<ISolid, SolidStub>(expectedId));
 }

@@ -137,14 +137,104 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-Curve2DStub* createCurveWithId(std::set<int>& createdCurveIds)
+TEST_F(GeometryBuilderTest, shouldCreateLineSegment3DByPoints)
+{
+  // given
+  setUpContext(&m_geometryBuilderStrict);
+  std::wstring script = L"lineSegment = LineSegment3D(Point3D(0, 0, 0), Point3D(100, 200, 300))";
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderStrict, createLineSegment3D(Point3D(0, 0, 0), Point3D(100, 200, 300))).
+    WillOnce(Return(new Curve3DStub()));
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateArc3DByPoints)
+{
+  // given
+  setUpContext(&m_geometryBuilderStrict);
+  std::wstring script = L"arc = Arc3D(Point3D(0, 0, 0), Point3D(50, 50, 50), Point3D(100, 100, 0))";
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderStrict, createArc3D(Point3D(0, 0, 0), Point3D(50, 50, 50), Point3D(100, 100, 0))).
+    WillOnce(Return(new Curve3DStub()));
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}
+
+Curve3DStub* createCurve3DWithId(std::set<int>& createdCurveIds)
+{
+  static int curveIndex = 0;
+  createdCurveIds.insert(curveIndex++);
+  return new Curve3DStub(*createdCurveIds.crbegin());
+}
+
+void saveCurve3DIds(const renga_script::ConstCurve3DVector& curves, std::set<int>& curveIds)
+{
+  for (auto pCurve : curves)
+    curveIds.insert(static_cast<const Curve3DStub*>(pCurve)->id);
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateContour3DByCurves)
+{
+  // given
+  setUpContext(&m_geometryBuilderNice);
+
+  std::wstring script = 
+    L"                                        \
+    p1 = Point3D(0, 0, 0)                     \
+    p2 = Point3D(300, 300, 300)               \
+    p3 = Point3D(600, 600, 0)                 \
+                                              \
+    side1 = LineSegment3D(p1, p2)             \
+    side2 = LineSegment3D(p2, p3)             \
+    side3 = LineSegment3D(p3, p1)             \
+                                              \
+    contour = Contour3D(side1, side2, side3)  \
+    ";
+
+  std::set<int> givenCurveIds;
+  auto createCurveAction = std::bind(createCurve3DWithId, std::ref(givenCurveIds));
+  ON_CALL(m_geometryBuilderNice, createLineSegment3D(_, _)).
+    WillByDefault(InvokeWithoutArgs(createCurveAction));
+
+  // expect
+  std::set<int> passedCurveIds;
+  auto saveCurveIdsAction = std::bind(saveCurve3DIds, std::placeholders::_1, std::ref(passedCurveIds));
+  EXPECT_CALL(m_geometryBuilderNice, createContour3D(Matcher<const renga_script::ConstCurve3DVector&>(_))).
+    WillOnce(
+      DoAll(
+        WithArg<0>(Invoke(saveCurveIdsAction)),
+        Return(new Curve3DStub())
+      )
+    );
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_TRUE(givenCurveIds == passedCurveIds);
+}
+
+// TODO: create template, remove code duplication for 3D
+Curve2DStub* createCurve2DWithId(std::set<int>& createdCurveIds)
 {
   static int curveIndex = 0;
   createdCurveIds.insert(curveIndex++);
   return new Curve2DStub(*createdCurveIds.crbegin());
 }
 
-void saveCurveIds(const renga_script::ConstCurveVector& curves, std::set<int>& curveIds)
+void saveCurve2DIds(const renga_script::ConstCurveVector& curves, std::set<int>& curveIds)
 {
   for (auto pCurve : curves)
     curveIds.insert(static_cast<const Curve2DStub*>(pCurve)->id);
@@ -156,13 +246,13 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
   setUpContext(&m_geometryBuilderNice);
 
   std::set<int> givenCurveIds;
-  auto createCurveAction = std::bind(createCurveWithId, std::ref(givenCurveIds));
+  auto createCurveAction = std::bind(createCurve2DWithId, std::ref(givenCurveIds));
   ON_CALL(m_geometryBuilderNice, createLineSegment(_, _)).
     WillByDefault(InvokeWithoutArgs(createCurveAction));
 
   // expect
   std::set<int> passedCurveIds;
-  auto saveCurveIdsAction = std::bind(saveCurveIds, std::placeholders::_1, std::ref(passedCurveIds));
+  auto saveCurveIdsAction = std::bind(saveCurve2DIds, std::placeholders::_1, std::ref(passedCurveIds));
   EXPECT_CALL(m_geometryBuilderNice, createContour(Matcher<const renga_script::ConstCurveVector&>(_))).
     WillOnce(
       DoAll(

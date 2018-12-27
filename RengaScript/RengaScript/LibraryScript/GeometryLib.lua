@@ -16,6 +16,10 @@ function isCurve(curve)
 	return type(curve) == "userdata" and curve.type == "Curve"
 end
 
+function isCurve3D(curve)
+	return type(curve) == "userdata" and curve.type == "Curve3D"
+end
+
 -----------------------------------------------------------------------
 -- Args check
 -----------------------------------------------------------------------
@@ -36,6 +40,13 @@ function thereAre2Points(...)
 		return false
 	end
 	return isPoint(select(1, ...)) and isPoint(select(2, ...))
+end
+
+function thereAre2Points3D(...)
+	if select("#", ...) ~= 2 then
+		return false
+	end
+	return isPoint3D(select(1, ...)) and isPoint3D(select(2, ...))
 end
 
 function thereAre3Points3D(...)
@@ -70,6 +81,18 @@ function thereAreOnlyCurves(...)
 	end
 	for key,value in pairs {...} do 
 		if not isCurve(value) then
+			return false
+		end
+	end
+	return true
+end
+
+function thereAreOnlyCurves3D(...)
+	if select("#", ...) < 1 then
+		return false
+	end
+	for key,value in pairs {...} do 
+		if not isCurve3D(value) then
 			return false
 		end
 	end
@@ -147,6 +170,50 @@ function Contour(...)
 	end
 		
 	error("Unrecognized arguments of Contour(...) function. "..contourFuncHelp)
+	return nil
+end
+
+-----------------------------------------------------------------------
+-- LineSegment3D function
+-----------------------------------------------------------------------
+local lineSegment3DFuncHelp = "LineSegment3D(...) requires two points."
+
+function LineSegment3D(...)
+	if thereAre2Points3D(...) then
+		return LineSegment3DByPoint(...)
+	end
+	error("Unrecognized arguments of LineSegment3D(...) function. "..lineSegment3DFuncHelp)
+	return nil
+end
+
+-----------------------------------------------------------------------
+-- Arc3D function
+-----------------------------------------------------------------------
+local arc3DFuncHelp = "Arc3D(...) requires three points"
+
+function Arc3D(...)
+	if thereAre3Points3D(...) then
+		return Arc3DBy3Points(...)
+  end
+	error("Unrecognized arguments of Arc3D(...) function. "..arc3DFuncHelp)
+	return nil
+end
+
+-----------------------------------------------------------------------
+-- Contour3D function
+-----------------------------------------------------------------------
+local contour3DFuncHelp = "Contour3D(...) requires one or more 3D curves."
+
+function Contour3D(...)
+	if thereAreOnlyCurves3D(...) then
+		curves = Curve3DArray()
+		for key,value in pairs {...} do 
+			curves:add(value)
+		end
+		return Contour3DByCurves(curves)
+	end
+		
+	error("Unrecognized arguments of Contour3D(...) function. "..contour3DFuncHelp)
 	return nil
 end
 

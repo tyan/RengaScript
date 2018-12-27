@@ -75,6 +75,42 @@ const renga_script::ICurve2D * Curve2DWrapper::curve() const
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// Curve3DWrapper
+////////////////////////////////////////////////////////////////////////////
+const std::string Curve3DWrapper::s_type = "Curve3D";
+
+Curve3DWrapper::Curve3DWrapper(renga_script::ICurve3D * pCurve)
+  : m_pCurve(pCurve)
+{
+}
+
+Curve3DWrapper::Curve3DWrapper(const Curve3DWrapper & other)
+  : m_pCurve((other.m_pCurve) ? other.m_pCurve->copy() : nullptr)
+{
+}
+
+Curve3DWrapper::Curve3DWrapper(Curve3DWrapper && other)
+  : m_pCurve(std::move(other.m_pCurve))
+{
+  other.m_pCurve = nullptr;
+}
+
+Curve3DWrapper::~Curve3DWrapper()
+{
+  delete m_pCurve;
+}
+
+const std::string & Curve3DWrapper::type() const
+{
+  return s_type;
+}
+
+const renga_script::ICurve3D * Curve3DWrapper::curve() const
+{
+  return m_pCurve;
+}
+
+////////////////////////////////////////////////////////////////////////////
 // Point2DVectorWrapper
 ////////////////////////////////////////////////////////////////////////////
 Point2DVectorWrapper::Point2DVectorWrapper()
@@ -145,6 +181,43 @@ size_t CurveVectorWrapper::count() const
 renga_script::ConstCurveVector CurveVectorWrapper::getCurves() const
 {
   renga_script::ConstCurveVector result;
+  for (auto& curve : m_curves)
+    result.push_back(curve.curve());
+  return result;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// Curve3DVectorWrapper
+////////////////////////////////////////////////////////////////////////////
+Curve3DVectorWrapper::Curve3DVectorWrapper()
+{}
+
+Curve3DVectorWrapper::Curve3DVectorWrapper(const Curve3DVectorWrapper & other)
+  : m_curves(other.m_curves)
+{}
+
+Curve3DVectorWrapper::Curve3DVectorWrapper(Curve3DVectorWrapper && other)
+  : m_curves(std::move(other.m_curves))
+{}
+
+void Curve3DVectorWrapper::add(const Curve3DWrapper & curve)
+{
+  m_curves.push_back(curve);
+}
+
+const Curve3DWrapper & Curve3DVectorWrapper::get(size_t index) const
+{
+  return m_curves.at(index);
+}
+
+size_t Curve3DVectorWrapper::count() const
+{
+  return m_curves.size();
+}
+
+renga_script::ConstCurve3DVector Curve3DVectorWrapper::getCurves() const
+{
+  renga_script::ConstCurve3DVector result;
   for (auto& curve : m_curves)
     result.push_back(curve.curve());
   return result;

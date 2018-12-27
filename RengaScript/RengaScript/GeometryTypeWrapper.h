@@ -62,7 +62,8 @@ namespace lua
     renga_script::ICurve2D* m_pCurve;
     static const std::string s_type;
   };
-  
+
+  // TODO: create template, remove code duplication for 3D
   class CurveVectorWrapper
   {
   public:
@@ -79,6 +80,42 @@ namespace lua
 
   private:
     std::vector<Curve2DWrapper> m_curves;
+  };
+
+  class Curve3DWrapper
+  {
+  public:
+    Curve3DWrapper(renga_script::ICurve3D* pCurve);
+    Curve3DWrapper(const Curve3DWrapper& other);
+    Curve3DWrapper(Curve3DWrapper&& other);
+    ~Curve3DWrapper();
+    const std::string& type() const;
+
+    // TODO: extract interface or friend accessor
+    // internal access
+    const renga_script::ICurve3D* curve() const;
+
+  private:
+    renga_script::ICurve3D* m_pCurve;
+    static const std::string s_type;
+  };
+
+  class Curve3DVectorWrapper
+  {
+  public:
+    Curve3DVectorWrapper();
+    Curve3DVectorWrapper(const Curve3DVectorWrapper& other);
+    Curve3DVectorWrapper(Curve3DVectorWrapper&& other);
+    void add(const Curve3DWrapper& curve);
+    const Curve3DWrapper& get(size_t index) const;
+    size_t count() const;
+
+    // TODO: extract interface or friend accessor
+    // internal access
+    renga_script::ConstCurve3DVector getCurves() const;
+
+  private:
+    std::vector<Curve3DWrapper> m_curves;
   };
 
   class Point2DVectorWrapper

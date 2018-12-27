@@ -134,10 +134,32 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createContour(curves.getCurves()));
   }
 
+  Curve3DWrapper lineSegment3DConstructByPoints(const Point3DWrapper& p1, const Point3DWrapper& p2, lua_State * pLuaState)
+  {
+    auto pGeometryBuilder = getGeometryBuilder(pLuaState);
+    return Curve3DWrapper(pGeometryBuilder->createLineSegment3D(p1.m_point, p2.m_point));
+  }
+
+  Curve3DWrapper arc3DConstructBy3Points(
+    const Point3DWrapper& p1, 
+    const Point3DWrapper& p2, 
+    const Point3DWrapper& p3, 
+    lua_State * pLuaState)
+  {
+    auto pGeometryBuilder = getGeometryBuilder(pLuaState);
+    return Curve3DWrapper(pGeometryBuilder->createArc3D(p1.m_point, p2.m_point, p3.m_point));
+  }
+
   SolidWrapper createCuboid(const Point3DWrapper& p1, const Point3DWrapper& p2, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
     return SolidWrapper(pGeometry2DBuilder->createCuboid(p1.m_point, p2.m_point));
+  }
+
+  Curve3DWrapper contour3DConstructByCurves(const Curve3DVectorWrapper& curves, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return Curve3DWrapper(pGeometry2DBuilder->createContour3D(curves.getCurves()));
   }
 
   SolidWrapper createExtrusionSolid(const Curve2DWrapper& base, double from, double to, lua_State * pLuaState)
@@ -218,6 +240,19 @@ namespace lua
       .endClass();
 
     luabridge::getGlobalNamespace(pLuaState)
+      .beginClass <Curve3DWrapper>("Curve3DClass")
+      .addProperty("type", &Curve3DWrapper::type)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
+      .beginClass<Curve3DVectorWrapper>("Curve3DArray")
+      .addConstructor<void(*) ()>()
+      .addFunction("add", &Curve3DVectorWrapper::add)
+      .addFunction("count", &Curve3DVectorWrapper::count)
+      .addFunction("get", &Curve3DVectorWrapper::get)
+      .endClass();
+
+    luabridge::getGlobalNamespace(pLuaState)
       .beginClass <SolidWrapper>("SolidClass")
       .addProperty("type", &SolidWrapper::type)
       .addFunction("__add", &SolidWrapper::operator+)
@@ -233,6 +268,9 @@ namespace lua
       .addFunction("ArcByCenterAndTwoPoints", arcConstructByCenterAndTwoPoints)
       .addFunction("ContourByPoints", contourConstructByPoints)
       .addFunction("ContourByCurves", contourConstructByCurves)
+      .addFunction("LineSegment3DByPoint", lineSegment3DConstructByPoints)
+      .addFunction("Arc3DBy3Points", arc3DConstructBy3Points)
+      .addFunction("Contour3DByCurves", contour3DConstructByCurves)
       .addFunction("Cuboid", createCuboid)
       .addFunction("Extrusion", createExtrusionSolid)
       .addFunction("LCSBy3Points", createLCSBy3Points)

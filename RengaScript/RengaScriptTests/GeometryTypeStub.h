@@ -2,6 +2,7 @@
 
 #include <RengaScript/GeometryTypes.h>
 
+// TODO: create template, remove code duplication for 3D
 class Curve2DStub : public ICurve2D
 {
 public:
@@ -25,6 +26,28 @@ public:
     auto pOtherStub = dynamic_cast<const Curve2DStub*>(pOther);
     assert(pOther);
     return new Curve2DStub(id + pOtherStub->id);
+  }
+
+public:
+  int id = 0;
+};
+
+class Curve3DStub : public ICurve3D
+{
+public:
+  Curve3DStub()
+  {}
+
+  Curve3DStub(int id_)
+    : id(id_)
+  {}
+
+  Curve3DStub(const Curve3DStub&) = default;
+  Curve3DStub(Curve3DStub&&) = default;
+
+  ICurve3D* copy() const override
+  {
+    return new Curve3DStub(id);
   }
 
 public:
