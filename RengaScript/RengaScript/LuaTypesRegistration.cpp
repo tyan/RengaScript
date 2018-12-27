@@ -168,6 +168,12 @@ namespace lua
     return SolidWrapper(pGeometry2DBuilder->createExtrusion(base.curve(), from, to));
   }
 
+  SolidWrapper createRevolutionSolid(const Curve2DWrapper& base, lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return SolidWrapper(pGeometry2DBuilder->createRevolution(base.curve()));
+  }
+
   LCSWrapper createLCSBy3Points(const Point3DWrapper& origin, const Point3DWrapper& xAxis, const Point3DWrapper& yAxis, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
@@ -273,6 +279,7 @@ namespace lua
       .addFunction("Contour3DByCurves", contour3DConstructByCurves)
       .addFunction("Cuboid", createCuboid)
       .addFunction("Extrusion", createExtrusionSolid)
+      .addFunction("Revolution", createRevolutionSolid)
       .addFunction("LCSBy3Points", createLCSBy3Points)
       .addFunction("LCSByPoint", createLCSByPoint)
       .addFunction("Move", moveSolidToLCS)

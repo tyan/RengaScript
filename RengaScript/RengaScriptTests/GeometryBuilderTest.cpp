@@ -327,6 +327,31 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
   ASSERT_TRUE(result) << m_context.error;
 }
 
+TEST_F(GeometryBuilderTest, shouldCreateRevolutionByCurve)
+{
+  // given
+  setUpContext(&m_geometryBuilderNice);
+  std::wstring script =
+    L"                                                            \
+    base = Contour(Point(0, -100), Point(200, 0), Point(0, 100))  \
+    ext = Revolution(base)                                        \
+    ";
+
+  int curveId = 42;
+  ON_CALL(m_geometryBuilderNice, createContour(Matcher<const renga_script::Point2DVector&>(_))).
+    WillByDefault(Return(new Curve2DStub(curveId)));
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderNice, createRevolution(CurveIdEqConst(curveId))).
+    WillOnce(Return(new SolidStub()));
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+}
+
 TEST_F(GeometryBuilderTest, shouldCreateLCSByOnePoint)
 {
   // given
