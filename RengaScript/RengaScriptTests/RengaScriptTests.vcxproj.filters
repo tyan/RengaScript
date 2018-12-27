@@ -18,6 +18,9 @@
     <Filter Include="Matchers">
       <UniqueIdentifier>{3848b8ad-fea6-46ac-8dec-795231f243fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{08be3674-7abd-4031-ab0e-3b2ba60d3f53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="Object3DDefinitionTest.cpp">
       <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecuteScriptFromString.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="Object3DDefinitionMock.h">
       <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecuteScriptFromString.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

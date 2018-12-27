@@ -6,6 +6,8 @@ class GeometryBuilderMock : public IGeometryBuilder
 public:
   MOCK_CONST_METHOD2(createRect, ICurve2D*(const Point2D& lb, const Point2D& rt));
   MOCK_CONST_METHOD2(createLineSegment, ICurve2D* (const Point2D& p1, const Point2D& p2));
+  MOCK_CONST_METHOD2(createArc, ICurve2D* (const Point2D& c, double r));
+  MOCK_CONST_METHOD4(createArc, ICurve2D*(const Point2D& c, const Point2D& p1, const Point2D& p2, int sense));
   MOCK_CONST_METHOD1(createContour, ICurve2D* (const Point2DVector& points));
   MOCK_CONST_METHOD1(createContour, ICurve2D* (const ConstCurveVector& curves));
   MOCK_CONST_METHOD3(createLCS, ILCS*(const Point3D& origin, const Point3D& xAxis, const Point3D& yAxis));

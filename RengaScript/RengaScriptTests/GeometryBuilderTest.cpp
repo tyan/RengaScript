@@ -86,6 +86,40 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
   EXPECT_TRUE(result) << m_context.error;
 }
 
+TEST_F(GeometryBuilderTest, shouldCreateCircle)
+{
+  // given
+  setUpContext(&m_geometryBuilderStrict);
+
+  std::wstring script = L"arc = Arc(Point(1000, 1000), 1000)";
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderStrict, createArc(Point2D(1000, 1000), 1000)).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}
+
+TEST_F(GeometryBuilderTest, shouldCreateArcByPoints)
+{
+  // given
+  setUpContext(&m_geometryBuilderStrict);
+
+  // expect
+  EXPECT_CALL(m_geometryBuilderStrict, createArc(Point2D(1000, 1000), Point2D(0, 1000), Point2D(2000, 1000), -1)).
+    WillOnce(Return(new Curve2DStub()));
+
+  // when
+  bool result = executeScript(L".\\TestData\\ArcByPoints.lua", m_context);
+
+  // then
+  EXPECT_TRUE(result) << m_context.error;
+}
+
 TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
 {
   // given

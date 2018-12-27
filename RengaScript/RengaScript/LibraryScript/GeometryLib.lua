@@ -4,10 +4,6 @@ local GeometryLib = {}
 -- Type check
 -----------------------------------------------------------------------
 
-function isNumber(number)
-	return type(number) == "number"
-end
-
 function isPoint(point)
 	return type(point) == "userdata" and point.type == "Point"
 end
@@ -47,6 +43,13 @@ function thereAre3Points3D(...)
 		return false
 	end
 	return isPoint3D(select(1, ...)) and isPoint3D(select(2, ...)) and isPoint3D(select(3, ...))
+end
+
+function thereAre3Points2DInFirst3Args(...)
+	if select("#", ...) < 3 then
+		return false
+	end
+	return isPoint(select(1, ...)) and isPoint(select(2, ...)) and isPoint(select(3, ...))
 end
 
 function thereAreOnlyPoints(...)
@@ -101,6 +104,25 @@ function LineSegment(...)
 		return LineSegmentByPoint(...)
 	end
 	error("Unrecognized arguments of LineSegment(...) function. "..lineSegmentFuncHelp)
+	return nil
+end
+
+
+-----------------------------------------------------------------------
+-- Arc function
+-----------------------------------------------------------------------
+local arcFuncHelp = "Arc(...) requires center, begin point, end point and sense".. 
+"(sense > 0 to move from begin point to end point counterclockwise, sense < 0 otherwise) to create circle arc"..
+ "or center point and radius to create circle"
+
+function Arc(...)
+	if thereAre3Points2DInFirst3Args(...) and isNumber(select(4, ...)) then
+		return ArcByCenterAndTwoPoints(...)
+  end
+  if select("#", ...) == 2 and isPoint(select(1, ...)) and isNumber(select(2, ...)) then
+		return CircleByCenterAndRadius(...)
+  end
+	error("Unrecognized arguments of Arc(...) function. "..arcFuncHelp)
 	return nil
 end
 

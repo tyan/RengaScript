@@ -14,6 +14,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "ExecuteScriptFromString.h"
+
 namespace renga_script {}
 
 using namespace testing;

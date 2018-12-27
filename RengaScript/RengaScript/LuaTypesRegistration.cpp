@@ -102,6 +102,26 @@ namespace lua
     return Curve2DWrapper(pGeometry2DBuilder->createLineSegment(lb.m_point, rt.m_point));
   }
 
+  Curve2DWrapper circleConstructByCenterAndRadius(
+    const Point2DWrapper& c,
+    double r,
+    lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createArc(c.m_point, r));
+  }
+
+  Curve2DWrapper arcConstructByCenterAndTwoPoints(
+    const Point2DWrapper& c, 
+    const Point2DWrapper& p1, 
+    const Point2DWrapper& p2, 
+    int sense,
+    lua_State * pLuaState)
+  {
+    auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
+    return Curve2DWrapper(pGeometry2DBuilder->createArc(c.m_point, p1.m_point, p2.m_point, sense));
+  }
+
   Curve2DWrapper contourConstructByPoints(const Point2DVectorWrapper& points, lua_State * pLuaState)
   {
     auto pGeometry2DBuilder = getGeometryBuilder(pLuaState);
@@ -209,6 +229,8 @@ namespace lua
       .addFunction("RectByPoint", rectConstructByPoints)
       .addFunction("LineSegmentByCoord", lineSegmentConstructByCoord)
       .addFunction("LineSegmentByPoint", lineSegmentConstructByPoints)
+      .addFunction("CircleByCenterAndRadius", circleConstructByCenterAndRadius)
+      .addFunction("ArcByCenterAndTwoPoints", arcConstructByCenterAndTwoPoints)
       .addFunction("ContourByPoints", contourConstructByPoints)
       .addFunction("ContourByCurves", contourConstructByCurves)
       .addFunction("Cuboid", createCuboid)

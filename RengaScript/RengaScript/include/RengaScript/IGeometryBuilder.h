@@ -8,6 +8,8 @@ namespace renga_script
   public:
     virtual ICurve2D* createRect(const Point2D& lb, const Point2D& rt) const = 0;
     virtual ICurve2D* createLineSegment(const Point2D& p1, const Point2D& p2) const = 0;
+    virtual ICurve2D* createArc(const Point2D& c, double r) const = 0;
+    virtual ICurve2D* createArc(const Point2D& c, const Point2D& p1, const Point2D& p2, int sense) const = 0;
     virtual ICurve2D* createContour(const Point2DVector& points) const = 0;
     virtual ICurve2D* createContour(const ConstCurveVector& curves) const = 0;
     virtual ILCS* createLCS(const Point3D& origin) const = 0;
