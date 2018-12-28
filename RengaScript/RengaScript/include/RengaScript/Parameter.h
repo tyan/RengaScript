@@ -15,6 +15,8 @@ namespace renga_script
     virtual ~AbstractParameter();
     const std::wstring& name() const;
     const std::wstring& category() const;
+    virtual bool isEqual(const AbstractParameter* pOther) const;
+    virtual AbstractParameter* copy() const = 0;
 
   protected:
     AbstractParameter(const std::wstring & name, const std::wstring& category);
@@ -33,7 +35,12 @@ namespace renga_script
     MetricParameter(const std::wstring & name, double defaultValue, const std::wstring& category = L"");
     MetricParameter(const MetricParameter& other);
    ~MetricParameter();
+   
+   // AbstractParameter
+   bool isEqual(const AbstractParameter* pOther) const override;
+   AbstractParameter* copy() const override;
 
+   // own
    double value() const;
    void setValue(double value);
 

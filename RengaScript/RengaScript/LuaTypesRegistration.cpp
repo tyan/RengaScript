@@ -262,6 +262,7 @@ namespace lua
       .beginClass <SolidWrapper>("SolidClass")
       .addProperty("type", &SolidWrapper::type)
       .addFunction("__add", &SolidWrapper::operator+)
+      .addFunction("__sub", &SolidWrapper::operator-)
       .addFunction("__band", &SolidWrapper::operator&)
       .endClass();
 

@@ -296,6 +296,11 @@ SolidWrapper SolidWrapper::operator+(const SolidWrapper & other) const
   return SolidWrapper(m_pSolid->getUnionWith(other.m_pSolid));
 }
 
+SolidWrapper SolidWrapper::operator-(const SolidWrapper & other) const
+{
+  return SolidWrapper(m_pSolid->getDifferenceWith(other.m_pSolid));
+}
+
 SolidWrapper SolidWrapper::operator&(const SolidWrapper & other) const
 {
   return SolidWrapper(m_pSolid->getMultisolidWith(other.m_pSolid));

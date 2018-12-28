@@ -448,3 +448,32 @@ TEST_F(GeometryBuilderTest, shouldCreateSolidsUnion)
   EXPECT_EQ(counter, 2); // 1, 2
   EXPECT_EQ(resultId, 3); // 1 + 2
 }
+
+TEST_F(GeometryBuilderTest, shouldCreateSolidsDifference)
+{
+  // given
+  setUpContext(&m_geometryBuilderNice);
+  int counter = 10;
+  int resultId = 0;
+
+  std::wstring script =
+    L"                                                            \
+    body1 = Cuboid(Point3D(0, 0, 0), Point3D(100, 100, 100))      \
+    body2 = Cuboid(Point3D(50, 50, 50), Point3D(200, 200, 200))   \
+    body3 = body1 - body2                                         \
+    Dump(body3)                                                   \
+    ";
+
+  ON_CALL(m_geometryBuilderNice, createCuboid(_, _)).
+    WillByDefault(InvokeWithoutArgs([&]() { return new SolidStub(--counter); }));
+  EXPECT_CALL(m_geometryBuilderNice, dump(Matcher<const ISolid*>(_))).
+    WillOnce(WithArg<0>(Invoke([&](const ISolid* pSolid) { resultId = ((const SolidStub*)pSolid)->id; })));
+
+  // when
+  bool result = executeScriptFromString(script, m_context);
+
+  // then
+  ASSERT_TRUE(result) << m_context.error;
+  EXPECT_EQ(counter, 8); // 9, 8
+  EXPECT_EQ(resultId, 1); // 9 - 8
+}
