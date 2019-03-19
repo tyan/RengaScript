@@ -29,17 +29,17 @@
     <ClCompile Include="RengaScriptTests.cpp">
       <Filter>Module</Filter>
     </ClCompile>
-    <ClCompile Include="ParametersTest.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryBuilderTest.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3DDefinitionTest.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="ExecuteScriptFromString.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaGeometryBuilderTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaObject3DDefinitionTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaParametersTest.cpp">
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

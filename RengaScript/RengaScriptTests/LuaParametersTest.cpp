@@ -4,7 +4,7 @@
 
 #include "ParametersMock.h"
 
-class ParametersTest : public Test
+class LuaParametersTest : public Test
 {
 public:
   void setupContext(IParameters* pParameters)
@@ -20,7 +20,7 @@ protected:
 };
 
 
-TEST_F(ParametersTest, shouldReadMetricParameters)
+TEST_F(LuaParametersTest, shouldReadMetricParameters)
 {
   // given
   MetricParameter lengthParameter(L"", 0);
@@ -50,7 +50,7 @@ TEST_F(ParametersTest, shouldReadMetricParameters)
   EXPECT_DOUBLE_EQ(widthParameter.value(), 300.0);
 }
 
-TEST_F(ParametersTest, shouldReadMetricParametersWithCategory)
+TEST_F(LuaParametersTest, shouldReadMetricParametersWithCategory)
 {
   // given
   MetricParameter lengthParameter(L"", 0, L"");
@@ -82,7 +82,7 @@ TEST_F(ParametersTest, shouldReadMetricParametersWithCategory)
   EXPECT_EQ(widthParameter.category(), L"Category2");
 }
 
-TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
+TEST_F(LuaParametersTest, shouldFailExecutionIfSettingParameterFailed)
 {
   // given
   setupContext(&m_parametersNiceMock);
@@ -95,7 +95,7 @@ TEST_F(ParametersTest, shouldFailExecutionIfSettingParameterFailed)
   EXPECT_EQ(result, false);
 }
 
-TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
+TEST_F(LuaParametersTest, shouldFailWhenParametersServiceNorSupported)
 {
   // given
   ON_CALL(m_parametersStrictMock, setParameter(_)).WillByDefault(Return(true));
@@ -107,7 +107,7 @@ TEST_F(ParametersTest, shouldFailWhenParametersServiceNorSupported)
   EXPECT_EQ(result, false);
 }
 
-TEST_F(ParametersTest, shouldParameterReturnValue)
+TEST_F(LuaParametersTest, shouldParameterReturnValue)
 {
   // given
   MetricParameter LParameter(L"", 0.0);
@@ -133,7 +133,7 @@ TEST_F(ParametersTest, shouldParameterReturnValue)
   EXPECT_DOUBLE_EQ(LParameter.value(), WParameter.value());
 }
 
-TEST_F(ParametersTest, valueCanBeSetToParameter)
+TEST_F(LuaParametersTest, valueCanBeSetToParameter)
 {
   // given
   MetricParameter LParameter(L"", 0.0);

@@ -7,7 +7,7 @@
 #include "GeometryTypeStub.h"
 #include "GeometryTypeMatcher.h"
 
-class GeometryBuilderTest : public Test
+class LuaGeometryBuilderTest : public Test
 {
 public:
   void setUpContext(IGeometryBuilder* pGeometryBuilder)
@@ -22,7 +22,7 @@ protected:
   GeometryBuilderNice m_geometryBuilderNice;
 };
 
-TEST_F(GeometryBuilderTest, shouldCreateRectByCoordinates)
+TEST_F(LuaGeometryBuilderTest, shouldCreateRectByCoordinates)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -38,7 +38,7 @@ TEST_F(GeometryBuilderTest, shouldCreateRectByCoordinates)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateRectByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateRectByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -54,7 +54,7 @@ TEST_F(GeometryBuilderTest, shouldCreateRectByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateLineSegmentByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -70,7 +70,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
+TEST_F(LuaGeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -86,7 +86,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateCircle)
+TEST_F(LuaGeometryBuilderTest, shouldCreateCircle)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -104,7 +104,7 @@ TEST_F(GeometryBuilderTest, shouldCreateCircle)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateArcByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateArcByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -120,7 +120,7 @@ TEST_F(GeometryBuilderTest, shouldCreateArcByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateContourByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -137,7 +137,7 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateLineSegment3DByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateLineSegment3DByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -154,7 +154,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLineSegment3DByPoints)
   EXPECT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateArc3DByPoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateArc3DByPoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -184,7 +184,7 @@ void saveCurve3DIds(const renga_script::ConstCurve3DVector& curves, std::set<int
     curveIds.insert(static_cast<const Curve3DStub*>(pCurve)->id);
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateContour3DByCurves)
+TEST_F(LuaGeometryBuilderTest, shouldCreateContour3DByCurves)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -240,7 +240,7 @@ void saveCurve2DIds(const renga_script::ConstCurveVector& curves, std::set<int>&
     curveIds.insert(static_cast<const Curve2DStub*>(pCurve)->id);
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
+TEST_F(LuaGeometryBuilderTest, shouldCreateContourByCurves)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -269,7 +269,7 @@ TEST_F(GeometryBuilderTest, shouldCreateContourByCurves)
   EXPECT_TRUE(givenCurveIds == passedCurveIds);
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateCurvesUnion)
+TEST_F(LuaGeometryBuilderTest, shouldCreateCurvesUnion)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -290,7 +290,7 @@ TEST_F(GeometryBuilderTest, shouldCreateCurvesUnion)
   EXPECT_EQ(resultId, 3); // 1 + 2
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateCuboid)
+TEST_F(LuaGeometryBuilderTest, shouldCreateCuboid)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -307,7 +307,7 @@ TEST_F(GeometryBuilderTest, shouldCreateCuboid)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
+TEST_F(LuaGeometryBuilderTest, shouldCreateExtrusionByCurve)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -327,7 +327,7 @@ TEST_F(GeometryBuilderTest, shouldCreateExtrusionByCurve)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateRevolutionByCurve)
+TEST_F(LuaGeometryBuilderTest, shouldCreateRevolutionByCurve)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -352,7 +352,7 @@ TEST_F(GeometryBuilderTest, shouldCreateRevolutionByCurve)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateLCSByOnePoint)
+TEST_F(LuaGeometryBuilderTest, shouldCreateLCSByOnePoint)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -369,7 +369,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByOnePoint)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
+TEST_F(LuaGeometryBuilderTest, shouldCreateLCSByThreePoints)
 {
   // given
   setUpContext(&m_geometryBuilderStrict);
@@ -386,7 +386,7 @@ TEST_F(GeometryBuilderTest, shouldCreateLCSByThreePoints)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldMoveSolidToLCS)
+TEST_F(LuaGeometryBuilderTest, shouldMoveSolidToLCS)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -407,7 +407,7 @@ TEST_F(GeometryBuilderTest, shouldMoveSolidToLCS)
   ASSERT_TRUE(result) << m_context.error;
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateMultiSolid)
+TEST_F(LuaGeometryBuilderTest, shouldCreateMultiSolid)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -428,7 +428,7 @@ TEST_F(GeometryBuilderTest, shouldCreateMultiSolid)
   EXPECT_EQ(resultId, 30); // (1 + 2) * 10
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateSolidsUnion)
+TEST_F(LuaGeometryBuilderTest, shouldCreateSolidsUnion)
 {
   // given
   setUpContext(&m_geometryBuilderNice);
@@ -449,7 +449,7 @@ TEST_F(GeometryBuilderTest, shouldCreateSolidsUnion)
   EXPECT_EQ(resultId, 3); // 1 + 2
 }
 
-TEST_F(GeometryBuilderTest, shouldCreateSolidsDifference)
+TEST_F(LuaGeometryBuilderTest, shouldCreateSolidsDifference)
 {
   // given
   setUpContext(&m_geometryBuilderNice);

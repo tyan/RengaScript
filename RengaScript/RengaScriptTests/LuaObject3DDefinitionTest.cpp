@@ -7,7 +7,7 @@
 #include "GeometryTypeStub.h"
 #include "GeometryTypeMatcher.h"
 
-class Object3DDefinitionTest : public Test
+class LuaObject3DDefinitionTest : public Test
 {
 public:
   void setUpContext(IGeometryBuilder* pGeometryBuilder, IObject3DDefinition* pObject3DDefinition)
@@ -26,7 +26,7 @@ protected:
   Object3DDefinitionMockNice m_object3DDefinitionNice;
 };
 
-TEST_F(Object3DDefinitionTest, shouldSetCubeSolid)
+TEST_F(LuaObject3DDefinitionTest, shouldSetCubeSolid)
 {
   // given
   setUpContext(&m_geometryBuilderNice, &m_object3DDefinitionStrict);
