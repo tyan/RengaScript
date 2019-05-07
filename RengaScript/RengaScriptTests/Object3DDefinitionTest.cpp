@@ -39,7 +39,7 @@ TEST_F(LuaObject3DDefinitionTest, shouldSetCubeSolid)
   EXPECT_CALL(m_object3DDefinitionStrict, setSolidRepresentation(SolidIdEqConst(solidId)));
 
   // when
-  bool result = executeScript(L".\\TestData\\SetObject3DSolidRepresentation_Cube.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\SetObject3DSolidRepresentation_Cube.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;

@@ -21,6 +21,9 @@ namespace renga_script
     std::wstring error;
   };
 
-  RENGA_SCRIPT_EXTERNAL bool executeScript(const std::wstring& path, 
+  RENGA_SCRIPT_EXTERNAL bool executeLuaScript(const std::wstring& path, 
+                                           Object3DConstructionContext& context);
+
+  RENGA_SCRIPT_EXTERNAL bool executePyScript(const std::wstring& path,
                                            Object3DConstructionContext& context);
 }

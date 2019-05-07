@@ -32,7 +32,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateRectByCoordinates)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Rect200x300.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\Rect200x300.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -48,7 +48,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateRectByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Rect200x300ByPoints.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\Rect200x300ByPoints.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -64,7 +64,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateLineSegmentByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByPoints.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\LineSegment_0_0_200_300_ByPoints.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -80,7 +80,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateLineSegmentByCoordinates)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LineSegment_0_0_200_300_ByCoord.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\LineSegment_0_0_200_300_ByCoord.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -114,7 +114,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateArcByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\ArcByPoints.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\ArcByPoints.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -131,7 +131,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateContourByPoints)
     WillOnce(Return(new Curve2DStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\ContourByPoints_0_0_300_300_600_0.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\ContourByPoints_0_0_300_300_600_0.lua", m_context);
 
   // then
   EXPECT_TRUE(result) << m_context.error;
@@ -262,7 +262,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateContourByCurves)
     );
 
   // when
-  bool result = executeScript(L".\\TestData\\ContourByCurves_0_0_300_300_600_0.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\ContourByCurves_0_0_300_300_600_0.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -282,7 +282,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateCurvesUnion)
     WillOnce(WithArg<0>(Invoke([&](const ICurve2D* pCurve) { resultId = ((const Curve2DStub*)pCurve)->id; })));
 
   // when
-  bool result = executeScript(L".\\TestData\\CurvesUnion.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\CurvesUnion.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -301,7 +301,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateCuboid)
     WillOnce(Return(new SolidStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Cuboid_m100_m100_0_100_100_100.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\Cuboid_m100_m100_0_100_100_100.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -321,7 +321,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateExtrusionByCurve)
     WillOnce(Return(new SolidStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\Extrusion_m100_100.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\Extrusion_m100_100.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -363,7 +363,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateLCSByOnePoint)
     WillOnce(Return(new LCSStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LCSByPoint.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\LCSByPoint.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -380,7 +380,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateLCSByThreePoints)
     WillOnce(Return(new LCSStub()));
 
   // when
-  bool result = executeScript(L".\\TestData\\LCSBy3Points.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\LCSBy3Points.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -401,7 +401,7 @@ TEST_F(LuaGeometryBuilderTest, shouldMoveSolidToLCS)
   EXPECT_CALL(m_geometryBuilderNice, move(SolidIdEq(bodyId), LCSIdEqConst(lcsId)));
 
   // when
-  bool result = executeScript(L".\\TestData\\MoveBodyToLCS.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\MoveBodyToLCS.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -420,7 +420,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateMultiSolid)
     WillOnce(WithArg<0>(Invoke([&](const ISolid* pSolid) { resultId = ((const SolidStub*)pSolid)->id; })));
 
   // when
-  bool result = executeScript(L".\\TestData\\SolidsCombining.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\SolidsCombining.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;
@@ -441,7 +441,7 @@ TEST_F(LuaGeometryBuilderTest, shouldCreateSolidsUnion)
     WillOnce(WithArg<0>(Invoke([&](const ISolid* pSolid) { resultId = ((const SolidStub*)pSolid)->id; })));
 
   // when
-  bool result = executeScript(L".\\TestData\\SolidsUnion.lua", m_context);
+  bool result = executeLuaScript(L".\\TestData\\SolidsUnion.lua", m_context);
 
   // then
   ASSERT_TRUE(result) << m_context.error;

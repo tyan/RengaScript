@@ -30,6 +30,12 @@
     <Filter Include="Source\Lua\LuaLibrary">
       <UniqueIdentifier>{737ad9d8-7567-4eb2-84bb-a5323b09a57b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Python">
+      <UniqueIdentifier>{005b4740-61ff-4be8-ba22-de0a45b24855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Python\TypeBinding">
+      <UniqueIdentifier>{39db8eca-cb5f-4993-97d3-936d1403e25a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parameter.cpp">
@@ -61,6 +67,15 @@
     </ClCompile>
     <ClCompile Include="GeometryTypes.cpp">
       <Filter>Source\API</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonScriptRunner.cpp">
+      <Filter>Source\Python</Filter>
+    </ClCompile>
+    <ClCompile Include="RengaPyModule.cpp">
+      <Filter>Source\Python\TypeBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PyScriptRuntimeContext.cpp">
+      <Filter>Source\Python</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +120,15 @@
     </ClInclude>
     <ClInclude Include="GeometryTypeWrapper.h">
       <Filter>Source\Lua\TypeWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonScriptRunner.h">
+      <Filter>Source\Python</Filter>
+    </ClInclude>
+    <ClInclude Include="RengaPyModule.h">
+      <Filter>Source\Python\TypeBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PyScriptRuntimeContext.h">
+      <Filter>Source\Python</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,13 +32,13 @@
     <ClCompile Include="ExecuteScriptFromString.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="LuaGeometryBuilderTest.cpp">
+    <ClCompile Include="GeometryBuilderTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="LuaObject3DDefinitionTest.cpp">
+    <ClCompile Include="Object3DDefinitionTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="LuaParametersTest.cpp">
+    <ClCompile Include="ParametersTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

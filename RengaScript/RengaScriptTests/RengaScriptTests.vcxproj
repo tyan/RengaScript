@@ -105,9 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExecuteScriptFromString.cpp" />
-    <ClCompile Include="LuaGeometryBuilderTest.cpp" />
-    <ClCompile Include="LuaObject3DDefinitionTest.cpp" />
-    <ClCompile Include="LuaParametersTest.cpp" />
+    <ClCompile Include="GeometryBuilderTest.cpp" />
+    <ClCompile Include="Object3DDefinitionTest.cpp" />
+    <ClCompile Include="ParametersTest.cpp" />
     <ClCompile Include="RengaScriptTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

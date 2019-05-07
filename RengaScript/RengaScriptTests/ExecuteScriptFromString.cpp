@@ -30,5 +30,5 @@ bool executeScriptFromString(const std::wstring & script, renga_script::Object3D
   std::wofstream stream(temporaryFilePath);
   stream << script;
   stream.flush();
-  return renga_script::executeScript(temporaryFilePath, context);
+  return renga_script::executeLuaScript(temporaryFilePath, context);
 }
